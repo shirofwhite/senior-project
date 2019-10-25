@@ -1,5 +1,5 @@
 <template>
-  <div id="map" style="width:100%;height:750px;"></div>
+  <div id="map"></div>
 </template>
 
 <script>
@@ -16,7 +16,7 @@ export default {
   },
   mounted(){
       /* eslint-disable */
-    const map = L.map('map').setView([13.708, 100.5219], 11);
+    const map = L.map('map').setView([13.723, 100.6019], 10.5);
 
     L.tileLayer('https://api.tiles.mapbox.com/v4/{id}/{z}/{x}/{y}.png?access_token={accessToken}', {
         attribution: 'Map data &copy; <a href="https://www.openstreetmap.org/">OpenStreetMap</a> contributors, <a href="https://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, Imagery © <a href="https://www.mapbox.com/">Mapbox</a>',
@@ -650,20 +650,21 @@ export default {
     ]
     }
 
-    function getColor(d) {
-    return d > 1000 ? '#800026' : 
-            d > 500  ? '#BD0026' :
-            d > 200  ? '#E31A1C' :
-            d > 100  ? '#FC4E2A' :
-            d > 50   ? '#FD8D3C' :
-            d > 20   ? '#FEB24C' :
-            d > 10   ? '#FED976' :
+    function getColor(id) {
+        // console.log(id)
+    return id > 45 ? '#800026' : 
+            id > 40  ? '#BD0026' :
+            id > 35  ? '#E31A1C' :
+            id > 30  ? '#FC4E2A' :
+            id > 25   ? '#FD8D3C' :
+            id >= 10   ? '#FEB24C' :
+            id < 10   ? '#FED976' :
                       '#FFEDA0';
     }
 
     function style(feature) {
 	return {
-		fillColor: getColor(feature.properties.density),
+		fillColor: getColor(feature.geometry.properties.id),
 		weight: 2,
 		opacity: 1,
 		color: 'white',
@@ -694,7 +695,8 @@ export default {
         // console.log(e.target.feature.geometry.properties)
         }
 
-    function zoomToFeature(e) {
+    function zoomToFeature() {
+        // this.$router.push('/Repositories')
         // map.fitBounds(e.target.getBounds());
         }
     
@@ -706,101 +708,25 @@ export default {
         });
         }
 
-    var info = L.control();
+    var info = L.control({position: 'topright'});
     /* eslint-disable */
     info.onAdd = function (map) {
-        this._div = L.DomUtil.create('div', 'info'); // create a div with a class "info"
+        this._div = L.DomUtil.create('div', 'legend'); // create a div with a class "info"
         this.update();
         return this._div;
     };
 
     // method that we will use to update the control based on feature properties passed
     info.update = function (props) {
-        this._div.innerHTML = (props ? '<br/><h3>' + props.Name + '</h3><br />'  : '');
-    };
+        this._div.innerHTML = (props ? '<div style="padding: 10px 12px; font: 14px/16px Arial, Helvetica, sans-serif; background: white; background : rgba(241, 238, 238, 0.8);box-shadow: 0 0 15px rgba(0,0,0,0.2); border-radius: 5px;"><br/><h3>' + props.Name + '</h3><br /></div>'  : '');
+        };
+
 
     // L.geoJSON(geojson).addTo(map);
     info.addTo(map);
-    geojson = L.geoJson(geojson, { style: style, onEachFeature: onEachFeature }).addTo(map);
-    
-
-    // function getColor(d) {
-    // return d > 1000 ? '#800026' : 
-    //         d > 500  ? '#BD0026' :
-    //         d > 200  ? '#E31A1C' :
-    //         d > 100  ? '#FC4E2A' :
-    //         d > 50   ? '#FD8D3C' :
-    //         d > 20   ? '#FEB24C' :
-    //         d > 10   ? '#FED976' :
-    //                   '#FFEDA0';
-    // }
-
-    // function style(feature) {
-	// return {
-	// 	fillColor: getColor(feature.properties.density),
-	// 	weight: 2,
-	// 	opacity: 1,
-	// 	color: 'white',
-	// 	dashArray: '3',
-	// 	fillOpacity: 0.7
-	// };
-    // }
-
-    // L.geoJson(geojson, {style: style}).addTo(map);
-    
-    // function highlightFeature(e) {
-    //     var layer = e.target;
-        
-    //     layer.setStyle({
-    //         weight: 5,
-    //         color: '#666',
-    //         dashArray: '',
-    //         fillOpacity: 0.7
-    //         });
-            
-    //         layer.bringToFront();
-
-    //         info.update(layer.feature.geometry.properties);
-        
-    // }
-
-    // function resetHighlight(e) {
-    //     geojson.resetStyle(e.target);
-    //     info.update();
-    //     // console.log(e.target.feature.geometry.properties)
-    //     }
-
-    // // function zoomToFeature(e) {
-    // //     map.fitBounds(e.target.getBounds());
-    // //     }
-    
-    // function onEachFeature(feature, layer) {
-	// layer.on({
-    //     mouseover: highlightFeature,
-    //     mouseout: resetHighlight
-    //     // click: zoomToFeature
-    //     });
-    //     }
-
-    // geojson = L.geoJson(geojson, { style: style, onEachFeature: onEachFeature }).addTo(map);
-
-    // var info = L.control();
-    // /* eslint-disable */
-    // info.onAdd = function (map) {
-    //     this._div = L.DomUtil.create('div', 'info'); // create a div with a class "info"
-    //     this.update();
-    //     return this._div;
-    // };
-    // /* eslint-enable */ 
-
-    // // method that we will use to update the control based on feature properties passed
-    // info.update = function (props) {
-    //     console.log(props)
-    //     this._div.innerHTML = (props ? '<br/><h3>' + props.Name + '</h3><br />'  : '');
-    // };
-
-    // info.addTo(map);
- 
+    geojson = L.geoJson(geojson, { style: style, onEachFeature: onEachFeature })
+    .on('click', function() { window.location = ('/#/Dashboard');})
+    .addTo(map);
  
     /* eslint-enable */ 
 }
@@ -812,13 +738,8 @@ export default {
 <style scoped>
 @import "../../node_modules/leaflet/dist/leaflet.css";
 
-/* .info {
-	padding: 10px 12px;
-	font: 14px/16px Arial, Helvetica, sans-serif;
-	background: white;
-	background: rgba(241, 238, 238, 0.8);
-	box-shadow: 0 0 15px rgba(0,0,0,0.2);
-	border-radius: 5px;
-} */
+#map { height: 675px; width:100%;}
+
+
 
 </style>

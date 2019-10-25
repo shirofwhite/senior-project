@@ -9,16 +9,17 @@
         <v-text-field v-model="search" append-icon="mdi-magnify" label="Search" single-line hide-details></v-text-field>
 
         <v-spacer></v-spacer>
-        <!-- <v-dialog v-model="dialog" max-width="500px">
-          <template v-slot:activator="{ on }">
-            <v-btn color="primary" dark class="mb-2" v-on="on">New Item</v-btn>
-          </template>
+
+        <v-dialog v-model="dialog" max-width="500px">
+          <!-- <template v-slot:activator="{ on }">
+            <v-btn color="primary" dark class="mb-2" v-on="on">New</v-btn>
+          </template> -->
           <v-card>
             <v-card-title>
               <span class="headline">{{ formTitle }}</span>
             </v-card-title>
 
-            <v-card-text>
+            <!-- <v-card-text>
               <v-container>
                 <v-row>
                   <v-col cols="12" sm="6" md="4">
@@ -38,31 +39,26 @@
                   </v-col>
                 </v-row>
               </v-container>
-            </v-card-text>
+            </!--> 
 
-            <v-card-actions>
+            <!-- <v-card-actions>
               <v-spacer></v-spacer>
               <v-btn color="blue darken-1" text @click="close">Cancel</v-btn>
               <v-btn color="blue darken-1" text @click="save">Save</v-btn>
-            </v-card-actions>
+            </v-card-actions> -->
           </v-card>
-        </v-dialog> -->
+        </v-dialog>
       </v-toolbar>
     </template>
     
-    <template v-slot:item.report="{ items }">
-      <v-btn depressed small color="primary">Report</v-btn>
+    <template v-slot:item.report="{ item }">
+      <v-btn depressed small color="success"  @click="report(item)">Report</v-btn>
     </template>
 
     <template v-slot:item.action="{ item }">
-      <router-link to="/Information">
-      <v-icon medium > mdi-note </v-icon>
-      </router-link>
-      <!-- ต้องมาปรับแก้ใช้ แบบ axios เพื่อส่งค่าไปบอกว่าเป็นโปรเจ็คไหนทีหลัง -->
-      <router-link to="/Editinfo">
-      <v-icon medium class="mr-2" @click="editItem(item)"> mdi-pen </v-icon>
-      </router-link>
-      <v-icon medium @click="deleteItem(item)"> mdi-delete </v-icon>
+        <v-icon medium class="mr-2" @click="infoItem(item)" color="cyan"> mdi-note </v-icon>
+        <v-icon medium class="mr-2" @click="editItem(item)" > mdi-pen </v-icon>
+        <v-icon medium class="mr-2" @click="deleteItem(item)" color="error"> mdi-delete </v-icon>
     </template>
     
     <template v-slot:no-data>
@@ -72,6 +68,10 @@
 </template>
 
 <script>
+/* eslint-disable */
+
+// import axios from "axios";
+
 export default {
     data () {
       return {
@@ -96,41 +96,93 @@ export default {
           { text: 'Action', value: 'action', sortable: false },
         ],
         information: [],
-    editedIndex: -1,
-    editedItem: {
-        name: '',
-        calories: 0,
-        fat: 0,
-        carbs: 0,
-        protein: 0,
-      },
-      defaultItem: {
-        name: '',
-        calories: 0,
-        fat: 0,
-        carbs: 0,
-        protein: 0,
-      },
+        project:[],
+    // editedIndex: -1,
+    // editedItem: {
+      //   name: '',
+      //   calories: 0,
+      //   fat: 0,
+      //   carbs: 0,
+      //   protein: 0,
+      // },
+      // defaultItem: {
+      //   name: '',
+      //   calories: 0,
+      //   fat: 0,
+      //   carbs: 0,
+      //   protein: 0,
+      // },
       }
     },
 
     computed: {
-      formTitle () {
-        return this.editedIndex === -1 ? 'New Item' : 'Edit Item'
+      formTitle (val) {
+        return 'Report'
       },
     },
 
     watch: {
       dialog (val) {
-        val || this.close()
+        val 
       },
     },
 
     created () {
       this.initialize()
+      // this.project()
     },
 
     methods: {
+      // project (){
+      //   this.project = [
+      //     {
+      //       "project01":{
+      //         typeRealEstate: 'ห้องชุดพักอาศัย',
+      //         gps: '[13.701626, 100.516623]',
+      //         roomNo:'29/193',
+      //         buildingNo:'ศุภาลัย ไลท์ สาทร-เจริญราษฎร์',
+      //         roomFloors:'11',
+      //         bypath:'-',
+      //         street:'เจริญราษฎร์',
+      //         subDistrict:'แขวงบางโคล่',
+      //         district:'เขตบางคอแหลม',
+      //         province:'กรุงเทพมหานคร',
+      //         customerName:'Bob',
+      //         sendDate:'01/01/19',
+      //         discoverDate:'01/01/19',
+      //         BTS:'BTS สุรศักดิ์ ',
+      //         distanceBTS:'2.00 km',
+      //         buildingFloors:'26',
+      //         facilities:'ร้านค้า ล็อบบี้  ลิฟท์ สระว่ายน้ำ ฟิตเนส ซาวน์น่า  ห้องสมุด สวน สนามเด็กเล่น ที่จอดรถ ',
+      //         camFee:'45',
+      //         staffName: 'Staff 1',
+      //         excutiveStaffName: 'Exstaff 2',
+      //         publicUtility: 'ไฟฟ้า ประปา โทรศัพท์ ท่อระบายน้ำ ไฟฟ้าส่องสว่าง',
+      //         commuType: 'commu 1',
+      //         communicationCondition:'-',
+      //         roomtype: 'type 1',
+      //         buildingAge:'15',
+      //         buildingstatus: 'status 1',
+      //         roomlocation: 'location 4',
+      //         roomview: 'view 1',
+      //         affairPrice:'4670530',
+      //         laws: 'rules 1',
+      //         totalUnit:'565',
+      //         roomArea:'91.07',
+      //         indoorArea:'69.63',
+      //         indoorAreaPrice:'4163874',
+      //         outdoorArea:'9.44',
+      //         outdoorAreaPrice:'282256',
+      //         privateCarpark:'12.00',
+      //         privateCarparkPrice:'224400',
+      //         totalPrice:'4670530',
+      //         evaluatePrice:'60200',
+      //         totalEvaluatePrice:'5400000',
+      //       }
+      //     },
+      //   ]
+      // },
+
       initialize () {
         this.information = [
           {
@@ -194,19 +246,40 @@ export default {
         ]},
 
       editItem (item) {
-        this.editedIndex = this.information.indexOf(item)
-        this.editedItem = Object.assign({}, item)
-        this.dialog = true
-        
-        // ดึงค่าจากแถวนั้นๆที่กด
+        console.log(item)
         console.log(Object.assign({}, item));
-        // ดึงชื่อโปรเจค
-        console.log(Object.assign({}, item).name);
+        this.$router.push('/Editinfo');
+        // console.log(this.project.project01);
+        // axios
+        // .get("http://localhost:8080/#/Editinfo/" + Object.assign({}, item).name)
+        // .then(response => {
+        //   // console.log(response.data);
+        //   // this.Users = response.data;
+        // })
+        // .catch(error => {
+        //   console.log(error);
+        // });
+        // this.editedIndex = this.information.indexOf(item)
+        // this.editedItem = Object.assign({}, item)
+        // this.dialog = true
+        
+        // // ดึงค่าจากแถวนั้นๆที่กด
+        // console.log(Object.assign({}, item));
+        // // ดึงชื่อโปรเจค
+        // console.log(Object.assign({}, item).name);
        },
 
       deleteItem (item) {
         const index = this.information.indexOf(item)
         confirm('Are you sure you want to delete this item?') && this.information.splice(index, 1)
+      },
+      infoItem (item) {
+        this.$router.push('/Information');
+      },
+      report(item) {
+        console.log(item)
+        console.log(Object.assign({}, item).name);
+        this.dialog = true
       },
 
     //   close () {
@@ -226,5 +299,6 @@ export default {
     //     this.close()
     //   },
     }
+    /* eslint-enable */ 
 }
 </script>

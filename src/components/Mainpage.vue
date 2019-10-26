@@ -3,6 +3,7 @@
 </template>
 
 <script>
+/* eslint-disable */
 
 import 'leaflet'
 // import geojson from './GeoJSON'
@@ -15,7 +16,7 @@ export default {
     }
   },
   mounted(){
-      /* eslint-disable */
+      
     const map = L.map('map').setView([13.723, 100.6019], 10.5);
 
     L.tileLayer('https://api.tiles.mapbox.com/v4/{id}/{z}/{x}/{y}.png?access_token={accessToken}', {
@@ -694,17 +695,11 @@ export default {
         info.update();
         // console.log(e.target.feature.geometry.properties)
         }
-
-    function zoomToFeature() {
-        // this.$router.push('/Repositories')
-        // map.fitBounds(e.target.getBounds());
-        }
     
     function onEachFeature(feature, layer) {
 	layer.on({
         mouseover: highlightFeature,
-        mouseout: resetHighlight,
-        click: zoomToFeature
+        mouseout: resetHighlight
         });
         }
 
@@ -718,20 +713,16 @@ export default {
 
     // method that we will use to update the control based on feature properties passed
     info.update = function (props) {
-        this._div.innerHTML = (props ? '<div style="padding: 10px 12px; font: 14px/16px Arial, Helvetica, sans-serif; background: white; background : rgba(241, 238, 238, 0.8);box-shadow: 0 0 15px rgba(0,0,0,0.2); border-radius: 5px;"><br/><h3>' + props.Name + '</h3><br /></div>'  : '');
-        };
-
+        this._div.innerHTML = (props ? '<div style="padding: 10px 12px; font: 14px/16px; Arial, Helvetica, sans-serif; background: white; background : rgba(241, 238, 238, 0.8); box-shadow: 0 0 15px rgba(0,0,0,0.2); border-radius: 5px;"><br/><h3>' + props.Name + '</h3><br /></div>'  : '');
+    };
 
     // L.geoJSON(geojson).addTo(map);
     info.addTo(map);
-    geojson = L.geoJson(geojson, { style: style, onEachFeature: onEachFeature })
-    .on('click', function() { window.location = ('/#/Dashboard');})
-    .addTo(map);
- 
-    /* eslint-enable */ 
+    geojson = L.geoJson(geojson, { style: style, onEachFeature: onEachFeature }).on('click', function() { window.location = ('/#/Dashboard');}).addTo(map);
 }
 
 }
+/* eslint-enable */ 
 </script>
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->

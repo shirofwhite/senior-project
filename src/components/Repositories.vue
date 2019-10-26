@@ -129,59 +129,59 @@ export default {
 
     created () {
       this.initialize()
-      // this.project()
+      this.projected()
     },
 
     methods: {
-      // project (){
-      //   this.project = [
-      //     {
-      //       "project01":{
-      //         typeRealEstate: 'ห้องชุดพักอาศัย',
-      //         gps: '[13.701626, 100.516623]',
-      //         roomNo:'29/193',
-      //         buildingNo:'ศุภาลัย ไลท์ สาทร-เจริญราษฎร์',
-      //         roomFloors:'11',
-      //         bypath:'-',
-      //         street:'เจริญราษฎร์',
-      //         subDistrict:'แขวงบางโคล่',
-      //         district:'เขตบางคอแหลม',
-      //         province:'กรุงเทพมหานคร',
-      //         customerName:'Bob',
-      //         sendDate:'01/01/19',
-      //         discoverDate:'01/01/19',
-      //         BTS:'BTS สุรศักดิ์ ',
-      //         distanceBTS:'2.00 km',
-      //         buildingFloors:'26',
-      //         facilities:'ร้านค้า ล็อบบี้  ลิฟท์ สระว่ายน้ำ ฟิตเนส ซาวน์น่า  ห้องสมุด สวน สนามเด็กเล่น ที่จอดรถ ',
-      //         camFee:'45',
-      //         staffName: 'Staff 1',
-      //         excutiveStaffName: 'Exstaff 2',
-      //         publicUtility: 'ไฟฟ้า ประปา โทรศัพท์ ท่อระบายน้ำ ไฟฟ้าส่องสว่าง',
-      //         commuType: 'commu 1',
-      //         communicationCondition:'-',
-      //         roomtype: 'type 1',
-      //         buildingAge:'15',
-      //         buildingstatus: 'status 1',
-      //         roomlocation: 'location 4',
-      //         roomview: 'view 1',
-      //         affairPrice:'4670530',
-      //         laws: 'rules 1',
-      //         totalUnit:'565',
-      //         roomArea:'91.07',
-      //         indoorArea:'69.63',
-      //         indoorAreaPrice:'4163874',
-      //         outdoorArea:'9.44',
-      //         outdoorAreaPrice:'282256',
-      //         privateCarpark:'12.00',
-      //         privateCarparkPrice:'224400',
-      //         totalPrice:'4670530',
-      //         evaluatePrice:'60200',
-      //         totalEvaluatePrice:'5400000',
-      //       }
-      //     },
-      //   ]
-      // },
+      projected (){
+        this.project = [
+          {
+            "project01":{
+              typeRealEstate: 'ห้องชุดพักอาศัย',
+              gps: '[13.701626, 100.516623]',
+              roomNo:'29/193',
+              buildingNo:'ศุภาลัย ไลท์ สาทร-เจริญราษฎร์',
+              roomFloors:'11',
+              bypath:'-',
+              street:'เจริญราษฎร์',
+              subDistrict:'แขวงบางโคล่',
+              district:'เขตบางคอแหลม',
+              province:'กรุงเทพมหานคร',
+              customerName:'Bob',
+              sendDate:'01/01/19',
+              discoverDate:'01/01/19',
+              BTS:'BTS สุรศักดิ์ ',
+              distanceBTS:'2.00 km',
+              buildingFloors:'26',
+              facilities:'ร้านค้า ล็อบบี้  ลิฟท์ สระว่ายน้ำ ฟิตเนส ซาวน์น่า  ห้องสมุด สวน สนามเด็กเล่น ที่จอดรถ ',
+              camFee:'45',
+              staffName: 'Staff 1',
+              excutiveStaffName: 'Exstaff 2',
+              publicUtility: 'ไฟฟ้า ประปา โทรศัพท์ ท่อระบายน้ำ ไฟฟ้าส่องสว่าง',
+              commuType: 'commu 1',
+              communicationCondition:'-',
+              roomtype: 'type 1',
+              buildingAge:'15',
+              buildingstatus: 'status 1',
+              roomlocation: 'location 4',
+              roomview: 'view 1',
+              affairPrice:'4670530',
+              laws: 'rules 1',
+              totalUnit:'565',
+              roomArea:'91.07',
+              indoorArea:'69.63',
+              indoorAreaPrice:'4163874',
+              outdoorArea:'9.44',
+              outdoorAreaPrice:'282256',
+              privateCarpark:'12.00',
+              privateCarparkPrice:'224400',
+              totalPrice:'4670530',
+              evaluatePrice:'60200',
+              totalEvaluatePrice:'5400000',
+            }
+          },
+        ]
+      },
 
       initialize () {
         this.information = [

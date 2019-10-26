@@ -703,23 +703,23 @@ export default {
         });
         }
 
-    var info = L.control({position: 'topright'});
-    /* eslint-disable */
+    var info = L.control()
     info.onAdd = function (map) {
-        this._div = L.DomUtil.create('div', 'legend'); // create a div with a class "info"
-        this.update();
-        return this._div;
+	    this._div = L.DomUtil.create('div', 'legend'); // create a div with a class "info"
+	    this.update();
+	    return this._div;
     };
 
     // method that we will use to update the control based on feature properties passed
     info.update = function (props) {
-        this._div.innerHTML = (props ? '<div style="padding: 10px 12px; font: 14px/16px; Arial, Helvetica, sans-serif; background: white; background : rgba(241, 238, 238, 0.8); box-shadow: 0 0 15px rgba(0,0,0,0.2); border-radius: 5px;"><br/><h3>' + props.Name + '</h3><br /></div>'  : '');
+	    this._div.innerHTML = (props ?
+		    '<div style="padding: 10px 12px; font: 14px/16px Arial, Helvetica, sans-serif; background: white; background : rgba(241, 238, 238, 0.8); box-shadow: 0 0 15px rgba(0,0,0,0.2); border-radius: 5px;"><br /><b>' + props.Name + '</b><br /></br></div>'
+		    : '');
     };
-
     // L.geoJSON(geojson).addTo(map);
     info.addTo(map);
-    geojson = L.geoJson(geojson, { style: style, onEachFeature: onEachFeature }).on('click', function() { window.location = ('/#/Dashboard');}).addTo(map);
-}
+    geojson = L.geoJson(geojson, { style: style, onEachFeature: onEachFeature }).on('click', function() { window.location = ('/#/Dashboard')}).addTo(map)
+  }
 
 }
 /* eslint-enable */ 
@@ -731,6 +731,13 @@ export default {
 
 #map { height: 675px; width:100%;}
 
-
+/* .legend{
+    padding: 10px 12px; 
+    font: 14px/16px Arial, Helvetica, sans-serif; 
+    background: white; 
+    background : rgba(241, 238, 238, 0.8); 
+    box-shadow: 0 0 15px rgba(0,0,0,0.2); 
+    border-radius: 5px;
+} */
 
 </style>

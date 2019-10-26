@@ -2,7 +2,7 @@ import Vue from 'vue'
 import Router from 'vue-router'
 import vuetify from './plugins/vuetify';
 
-import Mainpage from '@/components/Mainpage'
+import Mainpage from '@/components/mainpage'
 import Repositories from '@/components/Repositories'
 import Predict from '@/components/Predict'
 import Information from '@/components/Information'

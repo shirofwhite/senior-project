@@ -1,9 +1,9 @@
 <template>
-  <div class="container" style="width:75%">
+  <div class="container" style="width:60%">
     <v-card >
       <v-content >
     <v-responsive :aspect-ratio="16/9">
-    <form class="fluid form" style="margin:2%">
+    <form class="fluid form" style="margin:4%">
       <h1>Project01</h1>
       <br> <v-divider></v-divider> <br><br>
     
@@ -56,6 +56,12 @@
 
       <v-row>
         <v-col cols="12" md="3">    
+            <!-- <v-menu v-model="sendDate" :close-on-content-click="false" :nudge-right="40" transition="scale-transition" offset-y min-width="290px">
+              <template v-slot:activator="{ on }">
+                <v-text-field v-model="date" label="วันที่ส่งรายงาน" prepend-icon="mdi-calendar-today" readonly v-on="on"></v-text-field>
+              </template>
+              <v-date-picker v-model="senddate" @input="sendDate = false"></v-date-picker>
+            </v-menu> -->
             <v-text-field  v-model="sendDate" :error-messages="sendDateErrors" label="วันที่ส่งรายงาน"  required  @input="$v.sendDate.$touch()"  @blur="$v.sendDate.$touch()"></v-text-field>
         </v-col>
         <v-col cols="12" md="3">    
@@ -198,6 +204,7 @@
     <v-btn class="mr-4" @click="clear">clear</v-btn>
 
     </form>
+     
     </v-responsive>
       </v-content>
     </v-card>
@@ -275,7 +282,8 @@ export default {
       district:'',
       province:'',
       customerName:'',
-      sendDate:'',
+      sendDate: '',
+      // senddate: new Date().toISOString().substr(0, 10),
       discoverDate:'',
       BTS:'',
       distanceBTS:'',

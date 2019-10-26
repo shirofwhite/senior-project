@@ -1,9 +1,9 @@
 <template>
-  <div class="container" style="width:75%">
+  <div class="container" style="width:60%">
     <v-card>
       <v-content>
         <v-responsive :aspect-ratio="16/9">
-          <form class="fluid form" style="margin:2%">
+          <form class="fluid form" style="margin:4%">
             <h1>Project01</h1>
             <br />
             <v-divider></v-divider>

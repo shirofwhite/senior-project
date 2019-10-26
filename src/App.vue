@@ -1,9 +1,15 @@
 <template>
   <v-app>
-    <v-app-bar color="deep-purple accent-4" dense dark >
+    <v-app-bar color="deep-purple accent-4"  dense dark >
       <v-toolbar-items>
-        <v-btn text href="#/">Mainpage</v-btn>
+        <v-btn-toggle
+          tile
+          color="white accent-3"
+          group
+        >
+        <v-btn text href="#/Mainpage">Mainpage</v-btn>
         <v-btn text href="#/Repositories">Repositories</v-btn>
+        </v-btn-toggle>
         <!-- <v-btn text>Prediction</v-btn> -->
       </v-toolbar-items>
       <v-spacer></v-spacer>
@@ -21,12 +27,9 @@
 </template>
 
 <script>
-// import HelloWorld from './components/HelloWorld';
-
 export default {
   name: 'App',
   components: {
-    // HelloWorld,
   },
   data: () => ({
     //

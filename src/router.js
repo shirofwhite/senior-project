@@ -7,6 +7,8 @@ import Repositories from '@/components/Repositories'
 import Predict from '@/components/Predict'
 import Information from '@/components/Information'
 import Edit from '@/components/EditInfo'
+import Login from '@/components/Login'
+import Dashboard from '@/components/Dashboard'
 
 Vue.use(vuetify)
 Vue.use(Router)
@@ -14,7 +16,7 @@ Vue.use(Router)
 export default new Router({
     routes: [
       {
-        path: '/',
+        path: '/Mainpage',
         name: 'Mainpage',
         component: Mainpage
       },
@@ -37,6 +39,16 @@ export default new Router({
         path: '/EditInfo',
         name: 'Edit',
         component: Edit
+      },
+      {
+        path: '/',
+        name: 'Login',
+        component: Login
+      },
+      {
+        path: '/Dashboard',
+        name: 'Dashboard',
+        component: Dashboard
       },
     ]
   })

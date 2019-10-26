@@ -10,307 +10,193 @@
             <br />
             <br />
             
+  <v-row>
+        <v-col cols="12" md="4">
+          <v-text-field v-model="typeRealEstate" :error-messages="typeRealEstateErrors" :disabled="!isEditing" label="ประเภททรัพย์สิน" required @input="$v.typeRealEstate.$touch()" @blur="$v.typeRealEstate.$touch()"></v-text-field>
+        </v-col>
+        <v-col cols="12" md="4">
+            <v-text-field  v-model="gps" :disabled="!isEditing" label="GPS.-" :error-messages="gpsErrors" required  @input="$v.gps.$touch()"  @blur="$v.gps.$touch()"></v-text-field>
+        </v-col>
+        <v-col cols="12" md="4">
+        </v-col>
+      </v-row>
 
-            <div>
-            <div class="d-inline-flex pa-2" outlined tile>
-              <p>ประเภททรัพย์สิน :</p>
-              <p class="text-lg-right">{{typeRealEstate}}</p>
-            </div>
-            </div>
+      <v-row>
+        <v-col cols="12" md="2">
+            <v-text-field  v-model="roomNo" :disabled="!isEditing" label="ห้องชุดเลขที่" :error-messages="roomNoErrors" required  @input="$v.roomNo.$touch()"  @blur="$v.roomNo.$touch()"></v-text-field>
+        </v-col>
+        <v-col cols="12" md="4">    
+            <v-text-field  v-model="buildingNo" :disabled="!isEditing" label="อาคารชุด" :error-messages="buildingNoErrors"  required  @input="$v.buildingNo.$touch()"  @blur="$v.buildingNo.$touch()"></v-text-field>
+        </v-col>
+        <v-col cols="12" md="1">       
+            <v-text-field  v-model="roomFloors" :disabled="!isEditing" label="ชั้น" :error-messages="roomFloorsErrors"  required  @input="$v.roomFloors.$touch()"  @blur="$v.roomFloors.$touch()"></v-text-field>
+        </v-col>
+      </v-row>
 
-            <div>
-            <div class="d-inline-flex pa-2" outlined tile>
-              <p>GPS.- :</p>
-              <p class="text-lg-right">{{gps}}</p>
-            </div>
-            </div>
+      <v-row>
+        <v-col cols="9" md="2">
+            <v-text-field  v-model="bypath" :error-messages="bypathErrors" :disabled="!isEditing" label="ซอย" required @input="$v.bypath.$touch()"  @blur="$v.bypath.$touch()"></v-text-field>
+        </v-col>
+        <v-col cols="9" md="2">
+            <v-text-field  v-model="street" :error-messages="streetErrors" :disabled="!isEditing" label="ถนน"  required  @input="$v.street.$touch()"  @blur="$v.street.$touch()"></v-text-field>
+        </v-col>
+        <v-col cols="9" md="2">    
+            <v-text-field  v-model="subDistrict" :error-messages="subDistrictErrors" :disabled="!isEditing" label="(แขวง/ตำบล)"  required  @input="$v.subDistrict.$touch()"  @blur="$v.subDistrict.$touch()"></v-text-field>
+        </v-col>
+        <v-col cols="9" md="2">    
+            <v-text-field  v-model="district" :error-messages="districtErrors" :disabled="!isEditing" label="(เขต/อำเภอ)"  required  @input="$v.district.$touch()"  @blur="$v.district.$touch()"></v-text-field>
+        </v-col>
+        <v-col cols="9" md="3">    
+            <v-text-field  v-model="province" :error-messages="provinceErrors" :disabled="!isEditing" label="(กรุงเทพมหานคร/จังหวัด)"  required  @input="$v.province.$touch()"  @blur="$v.province.$touch()"></v-text-field>
+        </v-col>
+      </v-row>
 
-            <div>
-            <div class="d-inline-flex pa-2" outlined tile>
-              <p>ห้องชุดเลขที่ :</p>
-              <p class="text-lg-right">{{roomNo}}</p>
-            </div>
-            </div>
+      <v-row>
+        <v-col cols="18" md="6">
+            <v-text-field  v-model="customerName" :error-messages="customerNameErrors" :disabled="!isEditing" label="ลูกค้าราย:"  required  @input="$v.customerName.$touch()"  @blur="$v.customerName.$touch()"></v-text-field>
+        </v-col>
+      </v-row>
 
-            <div>
-            <div class="d-inline-flex pa-2" outlined tile>
-              <p>อาคารชุด :</p>
-              <p class="text-lg-right">{{buildingNo}}</p>
-            </div>
-            </div>
+      <v-row>
+        <v-col cols="12" md="3">    
+            <!-- <v-menu v-model="sendDate" :close-on-content-click="false" :nudge-right="40" transition="scale-transition" offset-y min-width="290px">
+              <template v-slot:activator="{ on }">
+                <v-text-field v-model="date" :disabled="!isEditing" label="วันที่ส่งรายงาน" prepend-icon="mdi-calendar-today" readonly v-on="on"></v-text-field>
+              </template>
+              <v-date-picker v-model="senddate" @input="sendDate = false"></v-date-picker>
+            </v-menu> -->
+            <v-text-field  v-model="sendDate" :error-messages="sendDateErrors" :disabled="!isEditing" label="วันที่ส่งรายงาน"  required  @input="$v.sendDate.$touch()"  @blur="$v.sendDate.$touch()"></v-text-field>
+        </v-col>
+        <v-col cols="12" md="3">    
+            <v-text-field  v-model="discoverDate" :error-messages="discoverDateErrors" :disabled="!isEditing" label="วันที่สำรวจและประเมิน"  required  @input="$v.discoverDate.$touch()"  @blur="$v.discoverDate.$touch()"></v-text-field>
+        </v-col>
+      </v-row>
 
-            <div>
-            <div class="d-inline-flex pa-2" outlined tile>
-              <p>ชั้น :</p>
-              <p class="text-lg-right">{{roomFloors}}</p>
-            </div>
-            </div>
+      <v-row>
+        <v-col cols="12" md="3">   
+          <v-text-field  v-model="BTS" :error-messages="BTSErrors" :disabled="!isEditing" label="ห่างจากสถานีรถไฟฟ้า"  required  @input="$v.BTS.$touch()"  @blur="$v.BTS.$touch()"></v-text-field>
+        </v-col>
+        <v-col cols="12" md="3">  
+          <v-text-field  v-model="distanceBTS" :error-messages="distanceBTSErrors" :disabled="!isEditing" label="ประมาณ"  required  @input="$v.distanceBTS.$touch()"  @blur="$v.distanceBTS.$touch()"></v-text-field>
+        </v-col>
+      </v-row>
 
-            <div>
-            <div class="d-inline-flex pa-2" outlined tile>
-              <p>ซอย :</p>
-              <p class="text-lg-right">{{bypath}}</p>
-            </div>
-            </div>
+      <v-row>
+        <v-col cols="12" md="2">
+          <v-text-field  v-model="buildingFloors"  :error-messages="buildingFloorsErrors" :disabled="!isEditing" label="อาคารชุด(สูง)"  required  @input="$v.buildingFloors.$touch()"  @blur="$v.buildingFloors.$touch()"></v-text-field>
+        </v-col>
+        <v-col cols="12" md="4">
+          <!-- จะทำเป็น select  ไม่ก็ checkbox ให้เลือก -->
+          <v-text-field  v-model="facilities" :error-messages="facilitiesErrors" :disabled="!isEditing" label="สิ่งอำนวยความสะดวกภายในโครงการ"  required  @input="$v.facilities.$touch()"  @blur="$v.facilities.$touch()"></v-text-field>
+        </v-col>
+        <v-col cols="12" md="5">
+          <v-text-field  v-model="camFee" :error-messages="camFeeErrors" :disabled="!isEditing" label="อัตราค่าส่วนกลาง (CAM FEE) [บาท/ตร.ม./เดือน]"  required  @input="$v.camFee.$touch()"  @blur="$v.camFee.$touch()"></v-text-field>
+        </v-col>
+      </v-row>
 
-            <div>
-            <div class="d-inline-flex pa-2" outlined tile>
-              <p>ถนน :</p>
-              <p class="text-lg-right">{{street}}</p>
-            </div>
-            </div>
+      <v-row>
+        <v-col cols="12" md="5">
+          <v-select v-model="staff" :items="staffName" :error-messages="staffErrors" :disabled="!isEditing" label="ผู้ประเมิน"  required  @change="$v.staff.$touch()"  @blur="$v.staff.$touch()"></v-select>
+        </v-col>
+        <v-col cols="12" md="5">
+          <v-select v-model="excutiveStaff" :items="excutiveStaffName" :error-messages="excutiveStaffErrors" :disabled="!isEditing" label="ผู้ตรวจสอบรายงาน"  required  @change="$v.excutiveStaff.$touch()"  @blur="$v.excutiveStaff.$touch()"></v-select>
+        </v-col>
+      </v-row>
 
-            <div>
-            <div class="d-inline-flex pa-2" outlined tile>
-              <p>(แขวง/ตำบล) :</p>
-              <p class="text-lg-right">{{subDistrict}}</p>
-            </div>
-            </div>
+      <v-row>
+        <v-col cols="12" md="5">
+          <!-- จะทำเป็น select  ไม่ก็ checkbox ให้เลือก -->
+          <v-text-field  v-model="publicUtility" :error-messages="publicUtilityErrors"  :disabled="!isEditing" label="สาธารณูปโภคที่ให้บริการทรัพย์สิน"  required  @input="$v.publicUtility.$touch()"  @blur="$v.publicUtility.$touch()"></v-text-field>
+        </v-col>
+        <v-col cols="12" md="3">
+          <v-select v-model="communication" :items="commuType" :error-messages="communicationErrors" :disabled="!isEditing" label="การคมนาคม"  required  @change="$v.communication.$touch()"  @blur="$v.communication.$touch()"></v-select>
+        </v-col>
+        <v-col cols="12" md="3">
+          <v-text-field v-model="communicationCondition" :error-messages="communicationConditionErrors" :disabled="!isEditing" label="หมายเหตุ" required @change="$v.communicationCondition.$touch()"  @blur="$v.communicationCondition.$touch()"></v-text-field>
+        </v-col>
+      </v-row>
 
-            <div>
-            <div class="d-inline-flex pa-2" outlined tile>
-              <p>(เขต/อำเภอ) :</p>
-              <p class="text-lg-right">{{district}}</p>
-            </div>
-            </div>
+      <v-row>
+        <v-col cols="9" md="2">
+          <v-select v-model="roomType" :items="roomtype" :error-messages="roomTypeErrors" :disabled="!isEditing" label="รูปแบบห้องชุด"  required  @change="$v.roomType.$touch()"  @blur="$v.roomType.$touch()"></v-select>
+        </v-col>
+        <v-col cols="9" md="2">
+          <v-text-field  v-model="buildingAge" :error-messages="buildingAgeErrors" :disabled="!isEditing" label="อายุอาคาร (ปี)"  required  @input="$v.buildingAge.$touch()"  @blur="$v.buildingAge.$touch()"></v-text-field>
+        </v-col>
+        <v-col cols="9" md="2">
+          <v-select v-model="buildingStatus" :items="buildingstatus" :error-messages="buildingStatusErrors" :disabled="!isEditing" label="สภาพอาคาร"  required  @change="$v.buildingStatus.$touch()"  @blur="$v.buildingStatus.$touch()"></v-select>
+        </v-col>
+        <v-col cols="9" md="2">
+          <v-select v-model="roomLocation" :items="roomlocation" :error-messages="roomLocationErrors" :disabled="!isEditing" label="ตำแหน่งที่ตั้งห้องชุด"  required  @change="$v.roomLocation.$touch()"  @blur="$v.roomLocation.$touch()"></v-select>
+        </v-col>
+        <v-col cols="9" md="2">
+          <v-select v-model="roomView" :items="roomview" :error-messages="roomViewErrors" :disabled="!isEditing" label="ทัศนียภาพ / วิว"  required  @change="$v.roomView.$touch()"  @blur="$v.roomView.$touch()"></v-select>
+        </v-col>
+      </v-row>
 
-            <div>
-            <div class="d-inline-flex pa-2" outlined tile>
-              <p>(กรุงเทพมหานคร/จังหวัด) :</p>
-              <p class="text-lg-right">{{province}}</p>
-            </div>
-            </div>
+      <v-row>
+        <v-col cols="12" md="3">
+          <v-text-field  v-model="affairPrice" :error-messages="affairPriceErrors" :disabled="!isEditing" label="ราคาประเมินราชการ (ห้องชุด)"  required  @input="$v.affairPrice.$touch()"  @blur="$v.affairPrice.$touch()"></v-text-field>
+        </v-col>
+        <v-col cols="12" md="3">
+          <v-select v-model="planLaws" :items="laws" :error-messages="planLawsErrors" :disabled="!isEditing" label="ข้อบังคับกฎหมายผังเมือง"  required  @change="$v.planLaws.$touch()"  @blur="$v.planLaws.$touch()"></v-select>
+        </v-col>
+      </v-row>
 
-            <div>
-            <div class="d-inline-flex pa-2" outlined tile>
-              <p>ลูกค้าราย :</p>
-              <p class="text-lg-right">{{customerName}}</p>
-            </div>
-            </div>
+      <v-row>
+        <v-col cols="12" md="3">
+          <v-text-field  v-model="totalUnit" :error-messages="totalUnitErrors" :disabled="!isEditing" label="ยูนิตทั้งหมด"  required  @input="$v.totalUnit.$touch()"  @blur="$v.totalUnit.$touch()"></v-text-field>
+        </v-col>
+        <v-col cols="12" md="3">
+          <v-text-field  v-model="roomArea" :error-messages="roomAreaErrors" :disabled="!isEditing" label="พื้นที่ทั้งหมด (ตร.ม.)"  required  @input="$v.roomArea.$touch()"  @blur="$v.roomArea.$touch()"></v-text-field>
+        </v-col>
+      </v-row>
 
-            <div>
-            <div class="d-inline-flex pa-2" outlined tile>
-              <p>วันที่ส่งรายงาน :</p>
-              <p class="text-lg-right">{{sendDate}}</p>
-            </div>
-            </div>
+      <v-row>
+        <v-col cols="12" md="3">
+          <v-text-field  v-model="indoorArea" :error-messages="indoorAreaErrors" :disabled="!isEditing" label="พื้นที่ภายในห้องพัก"  required  @input="$v.indoorArea.$touch()"  @blur="$v.indoorArea.$touch()"></v-text-field>
+        </v-col>
+        <v-col cols="12" md="3">
+          <v-text-field  v-model="indoorAreaPrice" :error-messages="indoorAreaPriceErrors" :disabled="!isEditing" label="ราคา (พื้นที่ภายในห้องพัก)"  required  @input="$v.indoorAreaPrice.$touch()"  @blur="$v.indoorAreaPrice.$touch()"></v-text-field> 
+        </v-col>
+      </v-row>
 
-            <div>
-            <div class="d-inline-flex pa-2" outlined tile>
-              <p>วันที่สำรวจและประเมิน :</p>
-              <p class="text-lg-right">{{discoverDate}}</p>
-            </div>
-            </div>
+      <v-row>
+        <v-col cols="12" md="3">    
+          <v-text-field  v-model="outdoorArea" :error-messages="outdoorAreaErrors" :disabled="!isEditing" label="ระเบียงที่วางแอร์"  required  @input="$v.outdoorArea.$touch()"  @blur="$v.outdoorArea.$touch()"></v-text-field>
+        </v-col>
+        <v-col cols="12" md="3">    
+          <v-text-field  v-model="outdoorAreaPrice" :error-messages="outdoorAreaPriceErrors" :disabled="!isEditing" label="ราคา (ระเบียงที่วางแอร์)"  required  @input="$v.outdoorAreaPrice.$touch()"  @blur="$v.outdoorAreaPrice.$touch()"></v-text-field>
+        </v-col>
+      </v-row>
 
-            <div>
-            <div class="d-inline-flex pa-2" outlined tile>
-              <p>ห่างจากสถานีรถไฟฟ้า :</p>
-              <p class="text-lg-right">{{BTS}}</p>
-            </div>
-            </div>
+      <v-row>
+        <v-col cols="12" md="3"> 
+          <v-text-field  v-model="privateCarpark" :error-messages="privateCarparkErrors" :disabled="!isEditing" label="ที่จอดรถส่วนตัว"  required  @input="$v.privateCarpark.$touch()"  @blur="$v.privateCarpark.$touch()"></v-text-field>
+        </v-col>
+        <v-col cols="12" md="3"> 
+          <v-text-field  v-model="privateCarparkPrice" :error-messages="privateCarparkPriceErrors" :disabled="!isEditing" label="ราคา (ที่จอดรถส่วนตัว)"  required  @input="$v.privateCarparkPrice.$touch()"  @blur="$v.privateCarparkPrice.$touch()"></v-text-field>
+        </v-col>
+      </v-row>
 
-            <div>
-            <div class="d-inline-flex pa-2" outlined tile>
-              <p>ประมาณ :</p>
-              <p class="text-lg-right">{{distanceBTS}}</p>
-            </div>
-            </div>
+      <v-row>
+        <v-col cols="12" md="3"> 
+          <v-text-field  v-model="totalPrice" :error-messages="totalPriceErrors" :disabled="!isEditing" label="ราคา (รวม)"  required  @input="$v.totalPrice.$touch()"  @blur="$v.totalPrice.$touch()"></v-text-field>
+        </v-col>
+      </v-row>
 
-            <div>
-            <div class="d-inline-flex pa-2" outlined tile>
-              <p>อาคารชุด (สูง) :</p>
-              <p class="text-lg-right">{{buildingFloors}}</p>
-            </div>
-            </div>
+      <v-row>
+        <v-col cols="12" md="3"> 
+          <v-text-field  v-model="evaluatePrice" :error-messages="evaluatePriceErrors" :disabled="!isEditing" label="มูลค่าประเมิน (ตร.ม)"  required  @input="$v.evaluatePrice.$touch()"  @blur="$v.evaluatePrice.$touch()"></v-text-field>
+        </v-col>
+        <v-col cols="12" md="3">
+          <v-text-field  v-model="totalEvaluatePrice" :error-messages="totalEvaluatePriceErrors" :disabled="!isEditing" label="มูลค่า"  required  @input="$v.totalEvaluatePrice.$touch()"  @blur="$v.totalEvaluatePrice.$touch()"></v-text-field>
+        </v-col>
+      </v-row>
+      <br><br>
 
-            <!-- จะทำเป็น select  ไม่ก็ checkbox ให้เลือก -->
-            <div>
-            <div class="d-inline-flex pa-2" outlined tile>
-              <p>สิ่งอำนวยความสะดวกภายในโครงการ :</p>
-              <p class="text-lg-right">{{facilities}}</p>
-            </div>
-            </div>
-
-            <div>
-            <div class="d-inline-flex pa-2" outlined tile>
-              <p>อัตราค่าส่วนกลาง (CAM FEE) [บาท/ตร.ม./เดือน] :</p>
-              <p class="text-lg-right">{{camFee}}</p>
-            </div>
-            </div>
-
-            <div>
-            <div class="d-inline-flex pa-2" outlined tile>
-              <p>ผู้ประเมิน :</p>
-              <p class="text-lg-right">{{staff}}</p>
-            </div>
-            </div>
-
-            <div>
-            <div class="d-inline-flex pa-2" outlined tile>
-              <p>ผู้ตรวจสอบรายงาน :</p>
-              <p class="text-lg-right">{{excutiveStaff}}</p>
-            </div>
-            </div>
-
-            <!-- จะทำเป็น select  ไม่ก็ checkbox ให้เลือก -->
-            <div>
-            <div class="d-inline-flex pa-2" outlined tile>
-              <p>สาธารณูปโภคให้บริการทรัพย์สิน :</p>
-              <p class="text-lg-right">{{publicUtility}}</p>
-            </div>
-            </div>
-
-            <div>
-            <div class="d-inline-flex pa-2" outlined tile>
-              <p>การคมนาคม :</p>
-              <p class="text-lg-right">{{communication}}</p>
-            </div>
-            </div>
-
-            <div>
-            <div class="d-inline-flex pa-2" outlined tile>
-              <p>หมายเหตุ :</p>
-              <p class="text-lg-right">{{communicationCondition}}</p>
-            </div>
-            </div>
-
-            <div>
-            <div class="d-inline-flex pa-2" outlined tile>
-              <p>รูปแบบห้องชุด :</p>
-              <p class="text-lg-right">{{roomType}}</p>
-            </div>
-            </div>
-
-            <div>
-            <div class="d-inline-flex pa-2" outlined tile>
-              <p>อายุอาคาร (ปี) :</p>
-              <p class="text-lg-right">{{buildingAge}}</p>
-            </div>
-            </div>
-
-            <div>
-            <div class="d-inline-flex pa-2" outlined tile>
-              <p>สภาพอาคาร :</p>
-              <p class="text-lg-right">{{buildingStatus}}</p>
-            </div>
-            </div>
-
-            <div>
-            <div class="d-inline-flex pa-2" outlined tile>
-              <p>ตำแหน่งที่ตั้งห้องชุด :</p>
-              <p class="text-lg-right">{{roomLocation}}</p>
-            </div>
-            </div>
-
-            <div>
-            <div class="d-inline-flex pa-2" outlined tile>
-              <p>ทัศนียภาพ/วิว :</p>
-              <p class="text-lg-right">{{roomView}}</p>
-            </div>
-            </div>
-
-            <div>
-            <div class="d-inline-flex pa-2" outlined tile>
-              <p>ราคาประเมินราชการ (ห้องชุด) :</p>
-              <p class="text-lg-right">{{affairPrice}}</p>
-            </div>
-            </div>
-
-            <div>
-            <div class="d-inline-flex pa-2" outlined tile>
-              <p>ข้อบังคับกฎหมายผังเมือง :</p>
-              <p class="text-lg-right">{{planLaws}}</p>
-            </div>
-            </div>
-
-            <div>
-            <div class="d-inline-flex pa-2" outlined tile>
-              <p>ยูนิตทั้งหมด :</p>
-              <p class="text-lg-right">{{totalUnit}}</p>
-            </div>
-            </div>
-
-            <div>
-            <div class="d-inline-flex pa-2" outlined tile>
-              <p>พื้นที่ทั้งหมด (ตร.ม.) :</p>
-              <p class="text-lg-right">{{roomArea}}</p>
-            </div>
-            </div>
-
-            <div>
-            <div class="d-inline-flex pa-2" outlined tile>
-              <p>พื้นที่ภายในห้องพัก :</p>
-              <p class="text-lg-right">{{indoorArea}}</p>
-            </div>
-            </div>
-
-            <div>
-            <div class="d-inline-flex pa-2" outlined tile>
-              <p>ราคา (พื้นที่ภายในห้องพัก) :</p>
-              <p class="text-lg-right">{{indoorAreaPrice}}</p>
-            </div>
-            </div>
-
-            <div>
-            <div class="d-inline-flex pa-2" outlined tile>
-              <p>ระเบียงที่วางแอร์ :</p>
-              <p class="text-lg-right">{{outdoorArea}}</p>
-            </div>
-            </div>
-
-            <div>
-            <div class="d-inline-flex pa-2" outlined tile>
-              <p>ราคา (ระเบียงที่วางแอร์) :</p>
-              <p class="text-lg-right">{{outdoorAreaPrice}}</p>
-            </div>
-            </div>
-
-            <div>
-            <div class="d-inline-flex pa-2" outlined tile>
-              <p>ที่จอดรถส่วนตัว :</p>
-              <p class="text-lg-right">{{privateCarpark}}</p>
-            </div>
-            </div>
-
-            <div>
-            <div class="d-inline-flex pa-2" outlined tile>
-              <p>ราคา (ที่จอดรถส่วนตัว) :</p>
-              <p class="text-lg-right">{{privateCarparkPrice}}</p>
-            </div>
-            </div>
-
-            <div>
-            <div class="d-inline-flex pa-2" outlined tile>
-              <p>ราคา (รวม) :</p>
-              <p class="text-lg-right">{{totalPrice}}</p>
-            </div>
-            </div>
-
-            <div>
-            <div class="d-inline-flex pa-2" outlined tile>
-              <p>มูลค่าประเมิน (ตร.ม.) :</p>
-              <p class="text-lg-right">{{evaluatePrice}}</p>
-            </div>
-            </div>
-
-            <div>
-            <div class="d-inline-flex pa-2" outlined tile>
-              <p>มูลค่า :</p>
-              <p class="text-lg-right">{{totalEvaluatePrice}}</p>
-            </div>
-            </div>
-            <br />
-            <br />
-
-            <v-checkbox
-              v-model="checkbox"
-              label="Do you agree?"
-              required
-              @change="$v.checkbox.$touch()"
-              @blur="$v.checkbox.$touch()"
-            ></v-checkbox>
             <v-btn class="mr-4" @click="submit" color="primary">OK</v-btn>
-            <v-btn class="mr-4" @click="edit">Edit</v-btn>
+            <v-btn class="mr-4" @click="gotoEdit">Edit</v-btn>
           </form>
         </v-responsive>
       </v-content>
@@ -377,6 +263,7 @@ export default {
   },
 
   data: () => ({
+    isEditing : null,
     projects: [],
     typeRealEstate: "",
     gps: "",
@@ -680,8 +567,10 @@ export default {
   },
 
   methods: {
-    edit () {
+    gotoEdit () {
         // this.$v.$touch()
+        this.$vuetify.goTo( 0, 0, 0,'linear')
+
         this.$router.push('/Editinfo')
       },
     clear() {

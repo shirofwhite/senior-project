@@ -1,15 +1,22 @@
 <template>
-  <v-container>
-     <v-card
+  <div style="width:95%; margin-left:2%;">
+    <h2 style="margin-top:1%;">เขตดุสิต</h2>
+    <br> <v-divider></v-divider> <br>
+
+
+      <div id="map"></div>
+
+     <!-- <v-card
     class="mt-4 mx-auto"
-    max-width="1000"
-    max-height="500"
+    max-width="400"
+    max-height="300"
+    style="margin-left:30%;"
   >
     <v-sheet
       class="v-sheet--offset mx-auto"
       color="cyan"
-      elevation="12"
-      max-width="calc(100% - 32px)"
+      elevation="10"
+      max-width="calc(100% - 36px)"
     >
       <v-sparkline
         :labels="labels"
@@ -33,11 +40,15 @@
       </v-icon>
       <span class="caption grey--text font-weight-light">last registration 26 minutes ago</span>
     </v-card-text>
-  </v-card>
-  </v-container>
+  </v-card> -->
+  </div>
 </template>
 
 <script>
+/* eslint-disable */
+
+import 'leaflet'
+const L = window.L;
 export default {
   data: () => ({
    labels: [
@@ -71,12 +82,29 @@ export default {
         640,
       ],
   }),
+
+  mounted(){
+    const map = L.map('map').setView([13.723, 100.6019], 10.5);
+
+    L.tileLayer('https://api.tiles.mapbox.com/v4/{id}/{z}/{x}/{y}.png?access_token={accessToken}', {
+        attribution: 'Map data &copy; <a href="https://www.openstreetmap.org/">OpenStreetMap</a> contributors, <a href="https://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, Imagery © <a href="https://www.mapbox.com/">Mapbox</a>',
+        //  maxZoom: 10,
+        id: 'mapbox.light', accessToken: 'pk.eyJ1Ijoic2hpcm9md2hpdGUiLCJhIjoiY2sxamh4OTJwMDFmeDNpbjJkaHJ6aTN1eSJ9.igzlhRIsG4MqK0nKLOGo9w'
+    }).addTo(map);
+  }
 };
+/* eslint-enable */
 </script>
 
 <style scoped>
+#map { 
+  height: 550px; 
+  width:650px;
+  margin-right:20%;
+  }
 .v-sheet--offset {
     top: -24px;
+    left: -10%;
     position: relative;
   }
 </style>

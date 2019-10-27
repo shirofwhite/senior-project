@@ -85,12 +85,15 @@
         <v-col cols="12" md="2">
           <v-text-field  v-model="buildingFloors"  :error-messages="buildingFloorsErrors" :disabled="!isEditing" label="อาคารชุด(สูง)"  required  @input="$v.buildingFloors.$touch()"  @blur="$v.buildingFloors.$touch()"></v-text-field>
         </v-col>
-        <v-col cols="12" md="4">
-          <!-- จะทำเป็น select  ไม่ก็ checkbox ให้เลือก -->
-          <v-text-field  v-model="facilities" :error-messages="facilitiesErrors" :disabled="!isEditing" label="สิ่งอำนวยความสะดวกภายในโครงการ"  required  @input="$v.facilities.$touch()"  @blur="$v.facilities.$touch()"></v-text-field>
-        </v-col>
         <v-col cols="12" md="5">
           <v-text-field  v-model="camFee" :error-messages="camFeeErrors" :disabled="!isEditing" label="อัตราค่าส่วนกลาง (CAM FEE) [บาท/ตร.ม./เดือน]"  required  @input="$v.camFee.$touch()"  @blur="$v.camFee.$touch()"></v-text-field>
+        </v-col>
+      </v-row>
+
+      <v-row>
+        <v-col cols="12" md="9">
+          <!-- จะทำเป็น select  ไม่ก็ checkbox ให้เลือก -->
+          <v-text-field  v-model="facilities" :error-messages="facilitiesErrors" :disabled="!isEditing" label="สิ่งอำนวยความสะดวกภายในโครงการ"  required  @input="$v.facilities.$touch()"  @blur="$v.facilities.$touch()"></v-text-field>
         </v-col>
       </v-row>
 
@@ -104,10 +107,13 @@
       </v-row>
 
       <v-row>
-        <v-col cols="12" md="5">
+        <v-col cols="12" md="9">
           <!-- จะทำเป็น select  ไม่ก็ checkbox ให้เลือก -->
           <v-text-field  v-model="publicUtility" :error-messages="publicUtilityErrors"  :disabled="!isEditing" label="สาธารณูปโภคที่ให้บริการทรัพย์สิน"  required  @input="$v.publicUtility.$touch()"  @blur="$v.publicUtility.$touch()"></v-text-field>
         </v-col>
+      </v-row>
+
+      <v-row>
         <v-col cols="12" md="3">
           <v-select v-model="communication" :items="commuType" :error-messages="communicationErrors" :disabled="!isEditing" label="การคมนาคม"  required  @change="$v.communication.$touch()"  @blur="$v.communication.$touch()"></v-select>
         </v-col>

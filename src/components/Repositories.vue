@@ -1,4 +1,7 @@
 <template>
+  <div>
+     <menubar/>
+
     <v-data-table :headers="headers" :search="search" :items="information" sort-by="date" class="elevation-1" >
     <template v-slot:top>
       <v-toolbar flat color="white">
@@ -65,31 +68,25 @@
       <v-btn color="primary" @click="initialize">Reset</v-btn>
     </template>
   </v-data-table>
+  </div>
 </template>
 
 <script>
 /* eslint-disable */
-
+import menubar from '@/components/menubar'
 // import axios from "axios";
 
 export default {
+   components: {
+      menubar,
+  },
     data () {
       return {
         search: '',
         dialog: false,
         headers: [
-          {
-            text: 'Project',
-            align: 'left',
-            sortable: false,
-            value: 'name',
-          },
-          {
-            text: 'Staff',
-            align: 'left',
-            sortable: false,
-            value: 'owner',
-          },
+          { text: 'Project', align: 'left', value: 'name' },
+          { text: 'Staff', align: 'left', value: 'owner' },
           { text: 'Sending Date', value: 'date' },
           { text: 'Predicted Price', value: 'price' },
           { text: 'Report', value: 'report', sortable: false },

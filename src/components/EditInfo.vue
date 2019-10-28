@@ -1,10 +1,13 @@
 <template>
+<div>
+   <menubar/>
+
   <div class="container" style="width:60%">
     <v-card >
       <v-content >
     <v-responsive :aspect-ratio="16/9">
     <form class="fluid form" style="margin:4%">
-      <h1>Project01</h1>
+      <div class="headline font-weight" style="margin-top:1%;">Project01</div>
       <br> <v-divider></v-divider> <br><br>
     
       <v-row>
@@ -208,14 +211,20 @@
       </v-content>
     </v-card>
     </div>
+</div>
 </template>
 
 <script>
 /* eslint-disable */
+import menubar from '@/components/menubar'
+
 import { validationMixin } from 'vuelidate'
 import { required} from 'vuelidate/lib/validators'
 
 export default {
+   components: {
+      menubar,
+  },
     mixins: [validationMixin],
 
     validations: {

@@ -1,11 +1,15 @@
 <template>
+<div>
+    <menubar/>
   <div id="map"></div>
+  </div>
 </template>
 
 <script>
 /* eslint-disable */
 
 import 'leaflet'
+import menubar from '@/components/menubar'
 // import geojson from './GeoJSON'
 const L = window.L;
 export default {
@@ -14,6 +18,9 @@ export default {
     return {
       map: []
     }
+  },
+  components: {
+      menubar,
   },
   mounted(){
       

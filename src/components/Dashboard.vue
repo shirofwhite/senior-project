@@ -1,6 +1,9 @@
 <template>
+<div>
+   <menubar/>
+
   <div style="width:95%; margin-left:2%;">
-    <h2 style="margin-top:1%;">เขตดุสิต</h2>
+    <div class="headline font-weight grey--text" style="margin-top:1%;">เขตดุสิต</div>
     <v-divider></v-divider>
     <br />
 
@@ -84,15 +87,22 @@
       </div>
     </v-row>
   </div>
+</div>
 </template>
 
 <script>
 /* eslint-disable */
 
 import "leaflet";
+import menubar from '@/components/menubar'
+
 const L = window.L;
 export default {
   data: () => ({}),
+
+   components: {
+      menubar,
+  },
 
   mounted() {
     const map = L.map("map").setView([13.723, 100.6019], 10.5);
@@ -205,23 +215,15 @@ export default {
         datasets: [
             {
                 label: "Prime and Fibonacci",
-                fillColor: "rgba(220,220,220,0.2)",
-                strokeColor: "rgba(220,220,220,1)",
-                pointColor: "rgba(220,220,220,1)",
-                pointStrokeColor: "#fff",
-                pointHighlightFill: "#fff",
-                pointHighlightStroke: "rgba(220,220,220,1)",
-                data: [2, 3, 5, 7, 11, 13, 17, 19, 23, 29]
+                borderColor: "#FFA6A6",
+                data: [2, 3, 5, 7, 11, 13, 17, 19, 23, 29],
+                fill: false
             },
             {
                 label: "My Second dataset",
-                fillColor: "rgba(151,187,205,0.2)",
-                strokeColor: "rgba(151,187,205,1)",
-                pointColor: "rgba(151,187,205,1)",
-                pointStrokeColor: "#fff",
-                pointHighlightFill: "#fff",
-                pointHighlightStroke: "rgba(151,187,205,1)",
-                data: [0, 1, 1, 2, 3, 5, 8, 13, 21, 34]
+                borderColor:  "#8393FC",
+                data: [0, 1, 1, 2, 3, 5, 8, 13, 21, 34],
+                fill: false
             }
         ]
       },
@@ -255,6 +257,7 @@ export default {
           {
             label: "# of Votes",
             data: [12, 19, 3, 5, 2, 3],
+            // data: [11, 12, 3, 4, 3, 10],
             backgroundColor: [
               "rgba(255, 99, 132, 0.2)",
               "rgba(54, 162, 235, 0.2)",
@@ -286,15 +289,16 @@ export default {
       }
     });
 
-    var b = document.getElementById("barCharts2");
-    var barCharts2 = new Chart(b, {
+    var ctx = document.getElementById("barCharts2");
+    var barCharts2 = new Chart(ctx, {
       type: "bar",
       data: {
         labels: ["Red", "Blue", "Yellow", "Green", "Purple", "Orange"],
         datasets: [
           {
             label: "# of Votes",
-            data: [11, 12, 3, 4, 2, 10],
+            // data: [12, 19, 3, 5, 2, 3],
+            data: [11, 12, 18, 4, 3, 10],
             backgroundColor: [
               "rgba(255, 99, 132, 0.2)",
               "rgba(54, 162, 235, 0.2)",
@@ -325,6 +329,7 @@ export default {
     }
       }
     });
+
   }
 };
 /* eslint-enable */
@@ -332,7 +337,7 @@ export default {
 
 <style scoped>
 #map {
-  height: 320px;
+  height: 550px;
   width: 550px;
 }
 .v-sheet--offset {

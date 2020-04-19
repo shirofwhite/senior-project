@@ -54,18 +54,32 @@
       </v-toolbar>
     </template>
     
+    <template v-slot:item.price="{ item }">
+      <v-chip :color="getColor(item.price)" dark v-if="item.price === 3">Ultimate</v-chip>
+      <v-chip :color="getColor(item.price)" dark v-if="item.price === 2">Luxury</v-chip>
+      <v-chip :color="getColor(item.price)" dark v-if="item.price === 1">High</v-chip>
+      <v-chip :color="getColor(item.price)" dark v-if="item.price === 0">Economy</v-chip>
+    </template>
+
+    <!-- <template v-slot:item.approved="{ active,toggle }">
+      <v-checkbox v-model="active" color="primary" @click="toggle"></v-checkbox> -->
+      <!-- <v-btn depressed small color="success" >Approved</v-btn> -->
+    <!-- </template> -->
+
     <template v-slot:item.report="{ item }">
       <v-btn depressed small color="success"  @click="report(item)">Report</v-btn>
     </template>
 
     <template v-slot:item.action="{ item }">
-        <v-icon medium class="mr-2" @click="infoItem(item)" color="cyan"> mdi-note </v-icon>
-        <v-icon medium class="mr-2" @click="editItem(item)" > mdi-pen </v-icon>
+       <!-- <router-link :to="{ path: '/Information/' + Object.assign({}, item).name}" > -->
+        <v-icon medium class="mr-2" @click="infoItem(item)" color="primary"> mdi-note </v-icon>
+       <!-- </router-link> -->
+        <!-- <v-icon medium class="mr-2" @click="editItem(item)" > mdi-pen </v-icon> -->
         <v-icon medium class="mr-2" @click="deleteItem(item)" color="error"> mdi-delete </v-icon>
     </template>
     
     <template v-slot:no-data>
-      <v-btn color="primary" @click="initialize">Reset</v-btn>
+      <!-- <v-btn color="primary" @click="initialize">Reset</v-btn> -->
     </template>
   </v-data-table>
   </div>
@@ -74,7 +88,7 @@
 <script>
 /* eslint-disable */
 import menubar from '@/components/menubar'
-// import axios from "axios";
+import axios from "axios";
 
 export default {
    components: {
@@ -87,13 +101,14 @@ export default {
         headers: [
           { text: 'Project', align: 'left', value: 'name' },
           { text: 'Staff', align: 'left', value: 'owner' },
-          { text: 'Sending Date', value: 'date' },
-          { text: 'Predicted Price', value: 'price' },
+          { text: 'Inspection Date', value: 'date' },
+          { text: 'Predicted Price', value: 'price', sortable: false },
+          // { text: 'Approved', value: 'approved', sortable: false },
           { text: 'Report', value: 'report', sortable: false },
           { text: 'Action', value: 'action', sortable: false },
         ],
         information: [],
-        project:[],
+        
     // editedIndex: -1,
     // editedItem: {
       //   name: '',
@@ -126,126 +141,49 @@ export default {
 
     created () {
       this.initialize()
-      this.projected()
     },
 
     methods: {
-      projected (){
-        this.project = [
-          {
-            "project01":{
-              typeRealEstate: 'ห้องชุดพักอาศัย',
-              gps: '[13.701626, 100.516623]',
-              roomNo:'29/193',
-              buildingNo:'ศุภาลัย ไลท์ สาทร-เจริญราษฎร์',
-              roomFloors:'11',
-              bypath:'-',
-              street:'เจริญราษฎร์',
-              subDistrict:'แขวงบางโคล่',
-              district:'เขตบางคอแหลม',
-              province:'กรุงเทพมหานคร',
-              customerName:'Bob',
-              sendDate:'01/01/19',
-              discoverDate:'01/01/19',
-              BTS:'BTS สุรศักดิ์ ',
-              distanceBTS:'2.00 km',
-              buildingFloors:'26',
-              facilities:'ร้านค้า ล็อบบี้  ลิฟท์ สระว่ายน้ำ ฟิตเนส ซาวน์น่า  ห้องสมุด สวน สนามเด็กเล่น ที่จอดรถ ',
-              camFee:'45',
-              staffName: 'Staff 1',
-              excutiveStaffName: 'Exstaff 2',
-              publicUtility: 'ไฟฟ้า ประปา โทรศัพท์ ท่อระบายน้ำ ไฟฟ้าส่องสว่าง',
-              commuType: 'commu 1',
-              communicationCondition:'-',
-              roomtype: 'type 1',
-              buildingAge:'15',
-              buildingstatus: 'status 1',
-              roomlocation: 'location 4',
-              roomview: 'view 1',
-              affairPrice:'4670530',
-              laws: 'rules 1',
-              totalUnit:'565',
-              roomArea:'91.07',
-              indoorArea:'69.63',
-              indoorAreaPrice:'4163874',
-              outdoorArea:'9.44',
-              outdoorAreaPrice:'282256',
-              privateCarpark:'12.00',
-              privateCarparkPrice:'224400',
-              totalPrice:'4670530',
-              evaluatePrice:'60200',
-              totalEvaluatePrice:'5400000',
-            }
-          },
-        ]
+      initialize () {
+        var url = "http://localhost:3000/repositories/getAllData";
+      axios
+        .get(url)
+        .then(response => {
+          console.log(response.data.rows[0]);
+          console.log(response.data.rows[0].inspectiondate)
+
+          if (response.data.rows.predictedPrice === 3) response.data.rows.predictedPrice = 'Ultimate'
+          else if (response.data.rows.predictedPrice === 2) response.data.rows.predictedPrice = 'Luxury'
+          else if (response.data.rows.predictedPrice === 1) response.data.rows.predictedPrice = 'High'
+          else if (response.data.rows.predictedPrice === 0) response.data.rows.predictedPrice = 'Economy'
+
+          response.data.rows.forEach(inf =>
+
+          this.information.push({
+            name: inf.projectName,
+            owner: inf.staffName,
+            date: inf.inspectiondate,
+            price: inf.predictedPrice
+          }))
+        })
+        .catch(error => {
+          console.log("NOOO");
+        });
       },
 
-      initialize () {
-        this.information = [
-          {
-            name: 'project01',
-            owner: 'Alice',
-            date: '01/01/19',
-            price: 12500000
-          },
-          {
-            name: 'project02',
-            owner: 'Bob',
-            date: '01/01/19',
-            price: 25000000
-          },
-          {
-            name: 'project03',
-            owner: 'Bob',
-            date: '02/01/19',
-            price: 40000000
-          },
-          {
-            name: 'project04',
-            owner: 'Katy',
-            date: '02/01/19',
-            price: 35000000
-          },
-          {
-            name: 'project05',
-            owner: 'Katy',
-            date: '05/01/19',
-            price: 1050000
-          },
-          {
-            name: 'project06',
-            owner: 'Blair',
-            date: '06/01/19',
-            price: 25400000
-          },
-          {
-            name: 'project07',
-            owner: 'Alice',
-            date: '08/01/19',
-            price: 3575000         },
-          {
-            name: 'project08',
-            owner: 'Alice',
-            date: '08/01/19',
-            price: 87000000
-          },
-          {
-            name: 'project09',
-            owner: 'Blair',
-            date: '09/01/19',
-            price: 51000000
-          },
-          {
-            name: 'project10',
-            owner: 'Blair',
-            date: '09/01/19',
-            price: 65000000         },
-        ]},
+      getColor (price) {
+        if (price === 3) return '#BD0026'
+        else if (price === 2) return '#FC4E2A'
+        else if (price === 1) return '#FD8D3C'
+        else if (price === 0) return '#FBC02D'
+      },
 
-      editItem (item) {
-        console.log(item)
-        console.log(Object.assign({}, item));
-        this.$router.push('/Editinfo');
+
+      // editItem (item) {
+      //   console.log(item)
+      //   console.log(Object.assign({}, item));
+      //   this.$router.push('/Editinfo/'+ Object.assign({}, item).name);
+      //       console.log(Object.assign({}, item).name)
         // console.log(this.project.project01);
         // axios
         // .get("http://localhost:8080/#/Editinfo/" + Object.assign({}, item).name)
@@ -264,14 +202,16 @@ export default {
         // console.log(Object.assign({}, item));
         // // ดึงชื่อโปรเจค
         // console.log(Object.assign({}, item).name);
-       },
+      //  },
 
       deleteItem (item) {
         const index = this.information.indexOf(item)
         confirm('Are you sure you want to delete this item?') && this.information.splice(index, 1)
       },
       infoItem (item) {
-        this.$router.push('/Information');
+            this.$router.push('/Information/' + Object.assign({}, item).name);
+            console.log(Object.assign({}, item).name)
+             
       },
       report(item) {
         console.log(item)

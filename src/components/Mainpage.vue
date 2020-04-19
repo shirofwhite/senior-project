@@ -10,6 +10,7 @@
 
 import 'leaflet'
 import menubar from '@/components/menubar'
+import axios from "axios";
 // import geojson from './GeoJSON'
 const L = window.L;
 export default {
@@ -23,6 +24,14 @@ export default {
       menubar,
   },
   mounted(){
+
+       var url = "http://localhost:3000/map/getAllMap";
+      axios
+        .get(url)
+        .then(response => {
+        //   console.log(response.data.rows[0]);
+          var dataall = response.data.rows
+          var mapcount = {}
       
     const map = L.map('map').setView([13.723, 100.6019], 10.5);
 
@@ -31,6 +40,29 @@ export default {
         //  maxZoom: 10,
         id: 'mapbox.light', accessToken: 'pk.eyJ1Ijoic2hpcm9md2hpdGUiLCJhIjoiY2sxamh4OTJwMDFmeDNpbjJkaHJ6aTN1eSJ9.igzlhRIsG4MqK0nKLOGo9w'
     }).addTo(map);
+
+    // console.log(dataall)
+
+    for (var i in dataall){
+        var sid = dataall[i].districtID.toString()
+        if (sid in mapcount ){
+            mapcount[sid][dataall[i].predictedPrice]++
+            // console.log(dataall[i].predictedPrice, sid)
+
+        }
+        else {
+            mapcount[sid] = {
+                0:0,
+                1:0,
+                2:0,
+                3:0
+            }
+            mapcount[sid][dataall[i].predictedPrice]++
+
+
+        }
+    }
+    // console.log(mapcount)
   
     var geojson={  
     "type": "FeatureCollection",  
@@ -44,7 +76,7 @@ export default {
         { 
             "type":"GeometryCollection", 
             "properties": { 
-                "id":1,
+                "id":0,
                 "Name": "วัฒนา", 
                 "value":0
             }, 
@@ -56,7 +88,7 @@ export default {
         { 
             "type":"GeometryCollection", 
             "properties": { 
-                "id":2,
+                "id":1,
                 "Name": "เขตสาทร", 
                 "value":0
             }, 
@@ -68,7 +100,7 @@ export default {
         { 
             "type":"GeometryCollection", 
             "properties": { 
-                "id":3,
+                "id":2,
                 "Name": "เขตดุสิต", 
                 "value":0
             }, 
@@ -80,7 +112,7 @@ export default {
         { 
             "type":"GeometryCollection", 
             "properties": { 
-                "id":4,
+                "id":3,
                 "Name": "เขตบางนา", 
                 "value":0
             }, 
@@ -92,7 +124,7 @@ export default {
         { 
             "type":"GeometryCollection", 
             "properties": { 
-                "id":5,
+                "id":4,
                 "Name": "เขตบางแค", 
                 "value":0
             }, 
@@ -104,7 +136,7 @@ export default {
         { 
             "type":"GeometryCollection", 
             "properties": { 
-                "id":6,
+                "id":5,
                 "Name": "เขตพญาไท", 
                 "value":0
             }, 
@@ -116,7 +148,7 @@ export default {
         { 
             "type":"GeometryCollection", 
             "properties": { 
-                "id":7,
+                "id":6,
                 "Name": "เขตจอมทอง", 
                 "value":0
             }, 
@@ -129,7 +161,7 @@ export default {
         { 
             "type":"GeometryCollection", 
             "properties": { 
-                "id":8,
+                "id":7,
                 "Name": "เขตดินแดง", 
                 "value":0
             }, 
@@ -141,7 +173,7 @@ export default {
         { 
             "type":"GeometryCollection", 
             "properties": { 
-                "id":9,
+                "id":8,
                 "Name": "เขตธนบุรี", 
                 "value":0
             }, 
@@ -153,7 +185,7 @@ export default {
         { 
             "type":"GeometryCollection", 
             "properties": { 
-                "id":10,
+                "id":9,
                 "Name": "เขตบางบอน", 
                 "value":0
             }, 
@@ -165,7 +197,7 @@ export default {
         { 
             "type":"GeometryCollection", 
             "properties": { 
-                "id" :11,
+                "id" :10,
                 "Name": "เขตบางรัก", 
                 "value":0
             }, 
@@ -177,7 +209,7 @@ export default {
         { 
             "type":"GeometryCollection", 
             "properties": { 
-                "id":12,
+                "id":11,
                 "Name": "เขตบางเขน", 
                 "value":0
             }, 
@@ -190,7 +222,7 @@ export default {
         { 
             "type":"GeometryCollection", 
             "properties": { 
-                "id":13,
+                "id":12,
                 "Name": "เขตประเวศ", 
                 "value":0
             }, 
@@ -202,7 +234,7 @@ export default {
         { 
             "type":"GeometryCollection", 
             "properties": { 
-                "id":14,
+                "id":13,
                 "Name": "เขตพระนคร", 
                 "value":0
             }, 
@@ -214,7 +246,7 @@ export default {
         { 
             "type":"GeometryCollection", 
             "properties": { 
-                "id":15,
+                "id":14,
                 "Name": "เขตสายไหม", 
                 "value":0
             }, 
@@ -227,7 +259,7 @@ export default {
         { 
             "type":"GeometryCollection", 
             "properties": { 
-                "id":16,
+                "id":15,
                 "Name": "เขตคลองสาน", 
                 "value":0
             }, 
@@ -239,7 +271,7 @@ export default {
         { 
             "type":"GeometryCollection", 
             "properties": { 
-                "id":17,
+                "id":16,
                 "Name": "เขตคลองเตย", 
                 "value":0
             }, 
@@ -251,7 +283,7 @@ export default {
         { 
             "type":"GeometryCollection", 
             "properties": { 
-                "id":18,
+                "id":17,
                 "Name": "เขตจตุจักร", 
                 "value":0
             }, 
@@ -263,7 +295,7 @@ export default {
         { 
             "type":"GeometryCollection", 
             "properties": { 
-                "id":19,
+                "id":18,
                 "Name": "เขตทุ่งครุ", 
                 "value":0
             }, 
@@ -276,7 +308,7 @@ export default {
         { 
             "type":"GeometryCollection", 
             "properties": { 
-                "id":20,
+                "id":19,
                 "Name": "เขตบางกะปิ", 
                 "value":0
             }, 
@@ -289,7 +321,7 @@ export default {
         { 
             "type":"GeometryCollection", 
             "properties": { 
-                "id":21,
+                "id":20,
                 "Name": "เขตบางซื่อ", 
                 "value":0
             }, 
@@ -301,7 +333,7 @@ export default {
         { 
             "type":"GeometryCollection", 
             "properties": { 
-                "id":22,
+                "id":21,
                 "Name": "เขตบางพลัด", 
                 "value":0
             }, 
@@ -313,7 +345,7 @@ export default {
         { 
             "type":"GeometryCollection", 
             "properties": { 
-                "id":23,
+                "id":22,
                 "Name": "เขตบึงกุ่ม", 
                 "value":0
             }, 
@@ -326,7 +358,7 @@ export default {
         { 
             "type":"GeometryCollection", 
             "properties": { 
-                "id":24,
+                "id":23,
                 "Name": "เขตปทุมวัน", 
                 "value":0
             }, 
@@ -338,7 +370,7 @@ export default {
         { 
             "type":"GeometryCollection", 
             "properties": { 
-                "id":25,
+                "id":24,
                 "Name": "เขตพระโขนง", 
                 "value":0
             }, 
@@ -350,7 +382,7 @@ export default {
         { 
             "type":"GeometryCollection", 
             "properties": { 
-                "id":26,
+                "id":25,
                 "Name": "เขตมีนบุรี", 
                 "value":0
             }, 
@@ -363,7 +395,7 @@ export default {
         { 
             "type":"GeometryCollection", 
             "properties": { 
-                "id":27,
+                "id":26,
                 "Name": "เขตยานนาวา", 
                 "value":0
             }, 
@@ -375,7 +407,7 @@ export default {
         { 
             "type":"GeometryCollection", 
             "properties": { 
-                "id":28,
+                "id":27,
                 "Name": "เขตราชเทวี", 
                 "value":0
             }, 
@@ -387,7 +419,7 @@ export default {
         { 
             "type":"GeometryCollection", 
             "properties": { 
-                "id":29,
+                "id":28,
                 "Name": "เขตสวนหลวง", 
                 "value":0
             }, 
@@ -400,7 +432,7 @@ export default {
         { 
             "type":"GeometryCollection", 
             "properties": { 
-                "id":30,
+                "id":29,
                 "Name": "เขตหนองจอก", 
                 "value":0
             }, 
@@ -413,7 +445,7 @@ export default {
         { 
             "type":"GeometryCollection", 
             "properties": { 
-                "id":31,
+                "id":30,
                 "Name": "เขตหนองแขม", 
                 "value":0
             }, 
@@ -425,7 +457,7 @@ export default {
         { 
             "type":"GeometryCollection", 
             "properties": { 
-                "id":32,
+                "id":31,
                 "Name": "เขตหลักสี่", 
                 "value":0
             }, 
@@ -437,7 +469,7 @@ export default {
         { 
             "type":"GeometryCollection", 
             "properties": { 
-                "id":33,
+                "id":32,
                 "Name": "เขตคันนายาว", 
                 "value":0
             }, 
@@ -450,7 +482,7 @@ export default {
         { 
             "type":"GeometryCollection", 
             "properties": { 
-                "id":34,
+                "id":33,
                 "Name": "เขตดอนเมือง", 
                 "value":0
             }, 
@@ -462,7 +494,7 @@ export default {
         { 
             "type":"GeometryCollection", 
             "properties": { 
-                "id":35,
+                "id":34,
                 "Name": "เขตตลิ่งชัน", 
                 "value":0
             }, 
@@ -474,7 +506,7 @@ export default {
         { 
             "type":"GeometryCollection", 
             "properties": { 
-                "id":36,
+                "id":35,
                 "Name": "เขตทวีวัฒนา", 
                 "value":0
             }, 
@@ -486,7 +518,7 @@ export default {
         { 
             "type":"GeometryCollection", 
             "properties": { 
-                "id":37,
+                "id":36,
                 "Name": "เขตลาดพร้าว", 
                 "value":0
             }, 
@@ -498,7 +530,7 @@ export default {
         { 
             "type":"GeometryCollection", 
             "properties": { 
-                "id":38,
+                "id":37,
                 "Name": "เขตสะพานสูง", 
                 "value":0
             }, 
@@ -510,7 +542,7 @@ export default {
         { 
             "type":"GeometryCollection", 
             "properties": { 
-                "id":39,
+                "id":38,
                 "Name": "เขตห้วยขวาง", 
                 "value":0
             }, 
@@ -522,7 +554,7 @@ export default {
         { 
             "type":"GeometryCollection", 
             "properties": { 
-                "id":40,
+                "id":39,
                 "Name": "เขตคลองสามวา", 
                 "value":0
             }, 
@@ -535,7 +567,7 @@ export default {
         { 
             "type":"GeometryCollection", 
             "properties": { 
-                "id":41,
+                "id":40,
                 "Name": "เขตบางคอแหลม", 
                 "value":0
             }, 
@@ -547,7 +579,7 @@ export default {
         { 
             "type":"GeometryCollection", 
             "properties": { 
-                "id":42,
+                "id":41,
                 "Name": "เขตภาษีเจริญ", 
                 "value":0
             }, 
@@ -560,7 +592,7 @@ export default {
         { 
             "type":"GeometryCollection", 
             "properties": { 
-                "id":43,
+                "id":42,
                 "Name": "เขตลาดกระบัง", 
                 "value":0
             }, 
@@ -573,7 +605,7 @@ export default {
         { 
             "type":"GeometryCollection", 
             "properties": { 
-                "id":44,
+                "id":43,
                 "Name": "เขตบางกอกน้อย", 
                 "value":0
             }, 
@@ -585,7 +617,7 @@ export default {
         { 
             "type":"GeometryCollection", 
             "properties": { 
-                "id":45,
+                "id":44,
                 "Name": "เขตบางกอกใหญ่", 
                 "value":0
             }, 
@@ -597,7 +629,7 @@ export default {
         { 
             "type":"GeometryCollection", 
             "properties": { 
-                "id":46,
+                "id":45,
                 "Name": "เขตวังทองหลาง", 
                 "value":0
             }, 
@@ -609,7 +641,7 @@ export default {
         { 
             "type":"GeometryCollection", 
             "properties": { 
-                "id":47,
+                "id":46,
                 "Name": "เขตบางขุนเทียน", 
                 "value":0
             }, 
@@ -622,7 +654,7 @@ export default {
         { 
             "type":"GeometryCollection", 
             "properties": { 
-                "id":48,
+                "id":47,
                 "Name": "เขตราษฎร์บูรณะ", 
                 "value":0
             }, 
@@ -634,7 +666,7 @@ export default {
         { 
             "type":"GeometryCollection", 
             "properties": { 
-                "id":49,
+                "id":48,
                 "Name": "เขตสัมพันธวงศ์", 
                 "value":0
             }, 
@@ -646,7 +678,7 @@ export default {
         { 
             "type":"GeometryCollection", 
             "properties": { 
-                "id":50,
+                "id":49,
                 "Name": "เขตป้อมปราบศัตรูพ่าย", 
                 "value":0
             }, 
@@ -659,18 +691,25 @@ export default {
     }
 
     function getColor(id) {
-        // console.log(id)
-    return id > 45 ? '#800026' : 
-            id > 40  ? '#BD0026' :
-            id > 35  ? '#E31A1C' :
-            id > 30  ? '#FC4E2A' :
-            id > 25   ? '#FD8D3C' :
-            id >= 10   ? '#FEB24C' :
-            id < 10   ? '#FED976' :
-                      '#FFEDA0';
+        var sid = id.toString()
+        var max = 0
+        var price = 0
+        for(var i in mapcount[sid]){
+            if(mapcount[sid][i]>max){
+                max = mapcount[sid][i]
+                price = i
+            }
+        }
+        // console.log(price)
+        // console.log(i)
+        return price == 3 ? '#BD0026' : 
+                price == 2  ? '#FC4E2A' :
+                price == 1  ? '#FD8D3C' :
+                      '#FBC02D';
     }
 
     function style(feature) {
+    //    console.log(feature)
 	return {
 		fillColor: getColor(feature.geometry.properties.id),
 		weight: 2,
@@ -724,10 +763,27 @@ export default {
 		    : '');
     };
     // L.geoJSON(geojson).addTo(map);
-    info.addTo(map);
-    geojson = L.geoJson(geojson, { style: style, onEachFeature: onEachFeature }).on('click', function() { window.location = ('/#/Dashboard')}).addTo(map)
-  }
 
+
+    info.addTo(map);
+    geojson = L.geoJson(geojson, { style: style , onEachFeature: onEachFeature })
+                .on('click', function() { 
+                    window.location = ('/#/Dashboard')
+                    // this.$router.push('/map/getSomeMap/:' + feature.geometry.properties.id);
+                    // console.log("aaa",response.data.rows)
+                    // console.log("BBB",geojson)
+                    })
+                .addTo(map)
+    
+    })
+        .catch(error => {
+          console.log("NOOO");
+        });
+  },
+
+  methods:{
+     
+  }
 }
 /* eslint-enable */ 
 </script>

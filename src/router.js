@@ -31,12 +31,12 @@ export default new Router({
         component: Predict
       },
       {
-        path: '/Information',
+        path: '/Information/:projectName',
         name: 'Information',
         component: Information
       },
       {
-        path: '/EditInfo',
+        path: '/EditInfo/:projectName',
         name: 'Edit',
         component: Edit
       },

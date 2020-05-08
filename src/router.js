@@ -4,11 +4,11 @@ import vuetify from './plugins/vuetify';
 
 import Mainpage from '@/components/mainpage'
 import Repositories from '@/components/Repositories'
-import Predict from '@/components/Predict'
 import Information from '@/components/Information'
 import Edit from '@/components/EditInfo'
 import Login from '@/components/Login'
 import Dashboard from '@/components/Dashboard'
+import Subdashboard from '@/components/Subdashboard'
 
 Vue.use(vuetify)
 Vue.use(Router)
@@ -24,11 +24,6 @@ export default new Router({
         path: '/Repositories',
         name: 'Repositories',
         component: Repositories
-      },
-      {
-        path: '/Prediction',
-        name: 'Predict',
-        component: Predict
       },
       {
         path: '/Information/:projectName',
@@ -49,6 +44,11 @@ export default new Router({
         path: '/Dashboard',
         name: 'Dashboard',
         component: Dashboard
+      },
+      {
+        path: '/Dashboard/:districtName',
+        name: 'Subdashboard',
+        component: Subdashboard
       },
     ]
   })

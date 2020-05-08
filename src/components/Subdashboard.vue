@@ -44,7 +44,7 @@
       <v-col cols="8" md="6">
         <v-card>
             <v-card-title>
-              <div class=" gray--text font-weight-medium headline">เขต/อำเภอ</div>
+              <div class=" gray--text font-weight-medium headline">แขวง/ตำบล</div>
               <v-spacer></v-spacer>
               <!-- <v-text-field v-model="search" append-icon="mdi-magnify" label="Search" single-line hide-details></v-text-field> -->
             </v-card-title>
@@ -53,9 +53,9 @@
                 <!-- <template v-slot:item.economy="{ item }">
                   <v-chip :color="getColor(item.economy)" dark >{{item.economy}}</v-chip>
                 </template> -->
-                <template v-slot:item.action="{ item }">
+                <!-- <template v-slot:item.action="{ item }">
                   <v-icon medium class="mr-2" @click="infoItem(item)" color="primary"> mdi-home-search </v-icon>
-                </template>
+                </template> -->
               </v-data-table>
               <div class="text-center pt-3 pb-3 " style="margin-top:1.5%;">
                 <v-pagination v-model="page" :length="pageCount"></v-pagination>
@@ -107,17 +107,17 @@ export default {
         search: '',
         headers: [
           {
-            text: 'เขต/อำเภอ',
+            text: 'แขวง/ตำบล',
             align: 'start',
             sortable: false,
-            value: 'district',
+            value: 'subdistrict',
           },
           { text: 'Economy', value: 'economy' },
           { text: 'High', value: 'high' },
           { text: 'Luxury', value: 'luxury' },
           { text: 'Ultimate', value: 'ultimate' },
           { text: 'รวมทั้งหมด', value: 'sumproject' },
-          { text: 'Action', value: 'action', sortable: false },
+        //   { text: 'Action', value: 'action', sortable: false },
         ],
         information: [],
         mprice:'',
@@ -132,11 +132,17 @@ export default {
       menubar,
   },
   methods:{
+     getColor (item) {
+       console.log(item.economy,this.class_economy, item.economy/this.class_economy)
+      //  return '#BD0026'
+        // if (price === 3) return '#BD0026'
+        // else if (price === 2) return '#FC4E2A'
+        // else if (price === 1) return '#FD8D3C'
+        // else if (price === 0) return '#FBC02D'
+      },
       infoItem (item) {
-          if(Object.assign({}, item).sumproject != 0){
-            this.$router.push('/Dashboard/' + Object.assign({}, item).district);
-          }
-            console.log(Object.assign({}, item).district)
+            // this.$router.push('/Information/' + Object.assign({}, item).name);
+            console.log(Object.assign({}, item))
              
       },
    
@@ -147,7 +153,7 @@ export default {
 
   mounted() {
   // mode price
-  var url5 = "http://localhost:3000/dashboard/getDashMostPrice";
+  var url5 = "http://localhost:3000/dashboard/getDashSubMostPrice/'" +  this.$route.params.districtName + "'";
       axios
         .get(url5)
         .then(response => {
@@ -159,7 +165,7 @@ export default {
       });
 
   // district table
-    var url = "http://localhost:3000/dashboard/getDashDist";
+    var url = "http://localhost:3000/dashboard/getSubDashSubdist/'" +  this.$route.params.districtName + "'";
       axios
         .get(url)
         .then(response => {
@@ -170,7 +176,7 @@ export default {
           // }
           response.data.rows.forEach(inf =>
           this.information.push({
-            district: inf.districtName,
+            subdistrict: inf.subdistrictName,
             economy: inf.eco,
             high: inf.high,
             luxury: inf.lux,
@@ -182,8 +188,9 @@ export default {
           console.log("NOOO");
       });
 
-  // roomPosition
-    var url2 = "http://localhost:3000/dashboard/getDashPos";
+ 
+    // roomPosition
+    var url2 = "http://localhost:3000/dashboard/getDashSubPos/'" +  this.$route.params.districtName + "'";
       axios
         .get(url2)
         .then(response => {
@@ -237,39 +244,39 @@ export default {
       });
       
   // roomPosition
-    var url4 = "http://localhost:3000/dashboard/getDashType";
+    var url4 = "http://localhost:3000/dashboard/getDashSubType/'" +  this.$route.params.districtName + "'";
       axios
         .get(url4)
         .then(response => {
           console.log(response.data.rows[0]);
 
-    var ctx = document.getElementById("myCharts").getContext("2d");
-    var myDoughnutChart = new Chart(ctx, {
-      type: "pie",
-      data: {
-        datasets: [
-          {
-            data: [response.data.rows[0].studio, response.data.rows[0].twobed, response.data.rows[0].threebed, response.data.rows[0].extra],
-            backgroundColor: ["#FB635D", "#FBF383", "#64FFDA", "#039BE5"]
-          }
-        ],
+        var ctx = document.getElementById("myCharts").getContext("2d");
+        var myDoughnutChart = new Chart(ctx, {
+            type: "pie",
+            data: {
+                datasets: [
+                    {
+                        data: [response.data.rows[0].studio, response.data.rows[0].twobed, response.data.rows[0].threebed, response.data.rows[0].extra],
+                        backgroundColor: ["#FB635D", "#FBF383", "#64FFDA", "#039BE5"]
+                    }
+                ],
 
-        labels: ["1 Bed", "2 Bed", "3 Bed", "อื่นๆ"]
-      },
-      options: {
-        title: {
-          display: true,
-            text: 'รูปแบบห้องชุด'
-        },
-      }
-    });
-    })
+                labels: ["1 Bed", "2 Bed", "3 Bed", "อื่นๆ"]
+            },
+            options: {
+                title: {
+                    display: true,
+                    text: 'รูปแบบห้องชุด'
+                },
+            }
+            });
+        })
         .catch(error => {
           console.log("NOOO");
       });
 
   // predictedPrice
-    var url4 = "http://localhost:3000/dashboard/getDashPrice";
+    var url4 = "http://localhost:3000/dashboard/getDashSubPrice/'" +  this.$route.params.districtName + "'";
       axios
         .get(url4)
         .then(response => {
@@ -327,7 +334,7 @@ export default {
       });
 
   // roomView
-    var url3 = "http://localhost:3000/dashboard/getDashView";
+    var url3 = "http://localhost:3000/dashboard/getDashSubView/'" +  this.$route.params.districtName + "'";
       axios
         .get(url3)
         .then(response => {
@@ -359,7 +366,7 @@ export default {
                   // borderWidth: 1
                 }
               ],
-              labels: ["ติดอาคาร", "เปิดโล่ง", "สวน", "สระว่ายน้ำ", "แม่น้ำ"],
+              labels: ["ติดอาคาร", "เปิดโล่ง", "สวนสาธารณะ", "สระว่ายน้ำ", "แม่น้ำ"],
             },
             options: {
               title: {

@@ -764,14 +764,27 @@ export default {
     };
     // L.geoJSON(geojson).addTo(map);
 
+//     var legend = L.control({position: 'bottomright'});
+//     legend.onAdd = function (map) {
+//         var div2 = L.DomUtil.create('div', 'info legend'),
+//         grades = ['Economy', 'High', 'Luxury', 'Ultimate'],
+//         labels = ['"#FBC02D"', '"#FD8D3C"', '"#FC4E2A"', '"#BD0026"'];
+
+//         div2.innerHTML = ('<div style="padding: 10px 12px; font: 14px/16px Arial, Helvetica, sans-serif; background: white; background : rgba(241, 238, 238, 0.8); box-shadow: 0 0 15px rgba(0,0,0,0.2);' 
+//             + 'border-radius: 5px;"><br />' + '<i style="background: '+ labels[0] +'"></i> <b>' + grades[0]+'</b>'+'<i style="background: '+ labels[1] +'"></i> <b>' + grades[1]+'</b>'+
+//             '<i style="background: '+ labels[2] +'"></i> <b>' + grades[2]+'</b>'+ '<i style="background: '+ labels[3] +'"></i> <b>' + grades[3]+'</b><br><br></div>'
+//         );
+
+//     return div2;
+// };
+
+// legend.addTo(map);
+
 
     info.addTo(map);
     geojson = L.geoJson(geojson, { style: style , onEachFeature: onEachFeature })
                 .on('click', function() { 
                     window.location = ('/#/Dashboard')
-                    // this.$router.push('/map/getSomeMap/:' + feature.geometry.properties.id);
-                    // console.log("aaa",response.data.rows)
-                    // console.log("BBB",geojson)
                     })
                 .addTo(map)
     
@@ -794,13 +807,13 @@ export default {
 
 #map { height: 675px; width:100%;}
 
-/* .legend{
+.legend{
     padding: 10px 12px; 
     font: 14px/16px Arial, Helvetica, sans-serif; 
     background: white; 
     background : rgba(241, 238, 238, 0.8); 
     box-shadow: 0 0 15px rgba(0,0,0,0.2); 
     border-radius: 5px;
-} */
+}
 
 </style>

@@ -50,6 +50,7 @@
 import menubar from '@/components/menubar'
 import axios from "axios"
 import XLSX from 'xlsx'
+import local from '../config-localhost'
 
 export default {
    components: {
@@ -137,7 +138,7 @@ export default {
 
     methods: {
       initialize () {
-        var url = "http://localhost:3000/repositories/getAllData";
+        var url = local.ip + ":" + local.port + "/repositories/getAllData";
       axios
         .get(url)
         .then(response => {
@@ -176,10 +177,21 @@ export default {
         else if (price === 0) return '#FBC02D'
       },
 
-      deleteItem (item) {
-        const index = this.information.indexOf(item)
-        confirm('Are you sure you want to delete this item?') && this.information.splice(index, 1)
-      },
+      // deleteItem (item) {
+      //   // const index = this.information.indexOf(item)
+      //   // confirm('Are you sure you want to delete this item?') && this.information.splice(index, 1)
+      //   // var url = local.ip + ":" + local.port + "/repositories/delete/'" +  Object.assign({}, item).name + ".xlsx'";
+      //   var url = local.ip + ":" + local.port +'/information/m/newdata/add'
+      //   axios
+      //     .post(url)
+      //     .then(response => {
+      //       console.log(response.data);
+      //     })
+      //       .catch(error => {
+      //     console.log("NOOO");
+      //   });       
+      // },   
+
       infoItem (item) {
             this.$router.push('/Information/' + Object.assign({}, item).name + ".xlsx");
             console.log(Object.assign({}, item).name)
@@ -189,7 +201,7 @@ export default {
         console.log(item)
         console.log(Object.assign({}, item).name);
 
-        var url = "http://localhost:3000/information/getSomeData/'" +  Object.assign({}, item).name + ".xlsx'";
+        var url = local.ip + ":" + local.port + "/information/getSomeData/'" +  Object.assign({}, item).name + ".xlsx'";
         axios
           .get(url)
           .then(response => {

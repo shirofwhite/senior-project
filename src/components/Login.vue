@@ -52,6 +52,7 @@
 import { validationMixin } from "vuelidate";
 import { required } from "vuelidate/lib/validators";
 import axios from "axios";
+import local from '../config-localhost'
 
 export default {
   mixins: [validationMixin],
@@ -72,7 +73,7 @@ export default {
     signIn(){
       // console.log(this.$v.userName.required)
       this.$v.$touch()
-      var url = "http://localhost:3000/auth/'" + this.userName + "'/'" + this.password + "'";
+      var url = local.ip + ":" + local.port + "/auth/'" + this.userName + "'/'" + this.password + "'";
       axios
         .get(url)
         .then(response => {

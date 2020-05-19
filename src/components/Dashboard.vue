@@ -98,6 +98,7 @@
 import "leaflet";
 import menubar from '@/components/menubar'
 import axios from 'axios'
+import local from '../config-localhost'
 
 export default {
   data: ()  => ({
@@ -147,7 +148,7 @@ export default {
 
   mounted() {
   // mode price
-  var url5 = "http://localhost:3000/dashboard/getDashMostPrice";
+  var url5 = local.ip + ":" + local.port + "/dashboard/getDashMostPrice";
       axios
         .get(url5)
         .then(response => {
@@ -159,7 +160,7 @@ export default {
       });
 
   // district table
-    var url = "http://localhost:3000/dashboard/getDashDist";
+    var url = local.ip + ":" + local.port + "/dashboard/getDashDist";
       axios
         .get(url)
         .then(response => {
@@ -183,7 +184,7 @@ export default {
       });
 
   // roomPosition
-    var url2 = "http://localhost:3000/dashboard/getDashPos";
+    var url2 = local.ip + ":" + local.port + "/dashboard/getDashPos";
       axios
         .get(url2)
         .then(response => {
@@ -237,7 +238,7 @@ export default {
       });
       
   // roomPosition
-    var url4 = "http://localhost:3000/dashboard/getDashType";
+    var url4 = local.ip + ":" + local.port + "/dashboard/getDashType";
       axios
         .get(url4)
         .then(response => {
@@ -269,7 +270,7 @@ export default {
       });
 
   // predictedPrice
-    var url4 = "http://localhost:3000/dashboard/getDashPrice";
+    var url4 = local.ip + ":" + local.port + "/dashboard/getDashPrice";
       axios
         .get(url4)
         .then(response => {
@@ -327,7 +328,7 @@ export default {
       });
 
   // roomView
-    var url3 = "http://localhost:3000/dashboard/getDashView";
+    var url3 = local.ip + ":" + local.port + "/dashboard/getDashView";
       axios
         .get(url3)
         .then(response => {

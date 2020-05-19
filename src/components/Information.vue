@@ -439,6 +439,7 @@ import menubar from '@/components/menubar'
 import { validationMixin } from "vuelidate";
 import { required } from "vuelidate/lib/validators";
 import axios from "axios";
+import local from '../config-localhost'
 
 export default {
   mixins: [validationMixin],
@@ -1095,8 +1096,8 @@ export default {
         longtitude: parseFloat(this.gps.split(",")[1]),
         buildingName: this.buildingNo,
         floor: parseInt(this.roomFloors),
-        subdistrictName: this.subdistrict,
-        districtName: this.district,
+        subdistrictID: this.subdistrict,
+        districtID: this.district,
         province: this.province,
         nearestBTS: this.nearestBTS,
         distanceBTS: parseInt(this.distanceBTS),
@@ -1149,7 +1150,7 @@ export default {
           this.$v.gps.required == true &&this.$v.planLaws.required == true && this.$v.subdistrict.required == true &&
           this.$v.district.required == true && this.$v.province.required == true ){
           
-            var url = "http://localhost:3000/information/update/" +  this.projectID ;
+            var url = local.ip + ":" + local.port + "/information/update/" +  this.projectID ;
              axios
               .post(url, newUser )
               .then(response => {
@@ -1171,7 +1172,7 @@ export default {
   },
   
   mounted() {
-    var url = "http://localhost:3000/information/getSomeData/'" +  this.$route.params.projectName + "'";
+    var url = local.ip + ":" + local.port + "/information/getSomeData/'" +  this.$route.params.projectName + "'";
     console.log(this.$route.params.projectName)
       axios
         .get(url)

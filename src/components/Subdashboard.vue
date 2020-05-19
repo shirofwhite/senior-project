@@ -98,6 +98,7 @@
 import "leaflet";
 import menubar from '@/components/menubar'
 import axios from 'axios'
+import local from '../config-localhost'
 
 export default {
   data: ()  => ({
@@ -153,7 +154,7 @@ export default {
 
   mounted() {
   // mode price
-  var url5 = "http://localhost:3000/dashboard/getDashSubMostPrice/'" +  this.$route.params.districtName + "'";
+  var url5 = local.ip + ":" + local.port + "/dashboard/getDashSubMostPrice/'" +  this.$route.params.districtName + "'";
       axios
         .get(url5)
         .then(response => {
@@ -165,7 +166,7 @@ export default {
       });
 
   // district table
-    var url = "http://localhost:3000/dashboard/getSubDashSubdist/'" +  this.$route.params.districtName + "'";
+    var url = local.ip + ":" + local.port + "/dashboard/getSubDashSubdist/'" +  this.$route.params.districtName + "'";
       axios
         .get(url)
         .then(response => {
@@ -190,7 +191,7 @@ export default {
 
  
     // roomPosition
-    var url2 = "http://localhost:3000/dashboard/getDashSubPos/'" +  this.$route.params.districtName + "'";
+    var url2 = local.ip + ":" + local.port + "/dashboard/getDashSubPos/'" +  this.$route.params.districtName + "'";
       axios
         .get(url2)
         .then(response => {
@@ -244,7 +245,7 @@ export default {
       });
       
   // roomPosition
-    var url4 = "http://localhost:3000/dashboard/getDashSubType/'" +  this.$route.params.districtName + "'";
+    var url4 = local.ip + ":" + local.port + "/dashboard/getDashSubType/'" +  this.$route.params.districtName + "'";
       axios
         .get(url4)
         .then(response => {
@@ -276,7 +277,7 @@ export default {
       });
 
   // predictedPrice
-    var url4 = "http://localhost:3000/dashboard/getDashSubPrice/'" +  this.$route.params.districtName + "'";
+    var url4 = local.ip + ":" + local.port + "/dashboard/getDashSubPrice/'" +  this.$route.params.districtName + "'";
       axios
         .get(url4)
         .then(response => {
@@ -334,7 +335,7 @@ export default {
       });
 
   // roomView
-    var url3 = "http://localhost:3000/dashboard/getDashSubView/'" +  this.$route.params.districtName + "'";
+    var url3 = local.ip + ":" + local.port + "/dashboard/getDashSubView/'" +  this.$route.params.districtName + "'";
       axios
         .get(url3)
         .then(response => {

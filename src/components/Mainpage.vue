@@ -11,6 +11,7 @@
 import 'leaflet'
 import menubar from '@/components/menubar'
 import axios from "axios";
+import local from '../config-localhost'
 // import geojson from './GeoJSON'
 const L = window.L;
 export default {
@@ -25,7 +26,7 @@ export default {
   },
   mounted(){
 
-       var url = "http://localhost:3000/map/getAllMap";
+       var url = local.ip + ":" + local.port + "/map/getAllMap";
       axios
         .get(url)
         .then(response => {
